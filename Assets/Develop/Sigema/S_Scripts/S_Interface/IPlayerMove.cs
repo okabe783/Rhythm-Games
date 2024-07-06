@@ -1,6 +1,9 @@
 public interface IPlayerMove 
 {
+    /// <summary> 速度 </summary>
     public float Speed { get; }
-    public void VerticalMovement(); // 上下移動
-    public void DownwardMovement(); // 下降
+    /// <summary> 上下移動 </summary>
+    public void VerticalMovement();
+    /// <summary> 下降 </summary>
+    public void DownwardMovement();
 }
