@@ -1,8 +1,13 @@
 public interface IPlayerInput
 {
+    /// <summary> Fキー入力時 </summary>
     public void InputUpper();
-    public void InputUpperAndLower(); // 同時押し
+    /// <summary> FJキー同時押し入力時 </summary>
+    public void InputUpperAndLower();
+    /// <summary> Jキー入力時 </summary>
     public void InputLower();
-    public void InputLongPressStart(); // 長押し開始
-    public void InputLongPressEnd(); // 長押し終了
+    /// <summary> 長押し開始 </summary>
+    public void InputLongPressStart();
+    /// <summary> 長押し終了 </summary>
+    public void InputLongPressEnd();
 }
