@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 
 /// <summary> ファイルから読み込んだ曲についてのデータ </summary>
@@ -33,12 +31,21 @@ public class NoteData
 {
     public int noteType;
     public float noteTime;
-    public float noteDuration;
     public GameObject noteObj;
 }
 
+/// <summary> ノーツの生成や管理を行うクラス </summary>
 public class NotesManager : MonoBehaviour
 {
+    [SerializeField, Header("ノーツのスピード")]
+    private float noteSpeed;
+    
+    [SerializeField, Header("ノーツの種類")]
+    private List<GameObject> notesObj = new List<GameObject>();
+    
+    [SerializeField, Header("ノーツの生成が始まる場所")]
+    private float NOTE_START_LINE = -4.6f;
+    
     /// <summary> 総ノーツ数 </summary>
     private int _notesNum;
 
@@ -46,21 +53,17 @@ public class NotesManager : MonoBehaviour
     private string _songName;
 
     /// <summary> 上のレーンに流れてくるノーツのリスト </summary>>
-    private List<NoteData> UpNoteList;
+    private List<NoteData> _upNoteList;
     
     /// <summary> 下のレーンに流れてくるノーツのリスト </summary>>
-    private List<NoteData> DownNoteList;
-
-    [SerializeField, Tooltip("ノーツのスピード")] 
-    private float noteSpeed;
+    private List<NoteData> _downNoteList;
     
-    [SerializeField, Tooltip("ノーツの種類")]
-    private List<GameObject> notesObj = new List<GameObject>();
-
+    private int NOTE_FINISH_TYPE = 3;
+    
     private void OnEnable()
     {
-        UpNoteList = new List<NoteData>();
-        DownNoteList = new List<NoteData>();
+        _upNoteList = new List<NoteData>();
+        _downNoteList = new List<NoteData>();
         _notesNum = 0;
         _songName = ""; // 選択された曲名をここに入れる
         Load(_songName);
@@ -82,32 +85,70 @@ public class NotesManager : MonoBehaviour
             float beatSec = barLength * (float)inputJson.notes[i].LPB;
             
             // ノーツの流れてくる時間
-            float time = (beatSec * inputJson.notes[i].num / inputJson.notes[i].LPB) + inputJson.offset * 0.01f;
-            
-            float noteDuration = 0;
-            if (inputJson.notes[i].type == 2) // LongNoteだった時のnoteの長さ
-            {
-                float finishTime = (beatSec * inputJson.notes[i].notes[0].num / inputJson.notes[i].notes[0].LPB) + inputJson.offset * 0.01f;
-                noteDuration = finishTime - time;
-            }
+            float time = 
+                (beatSec * inputJson.notes[i].num / inputJson.notes[i].LPB) 
+                         + inputJson.offset * 0.01f;
             
             // ノーツの生成
-            float x = time * noteSpeed * 0.8f + 3.5f;
-            var note = Instantiate(notesObj[inputJson.notes[i].type - 1], new Vector2(x, -2f * inputJson.notes[i].block + 1f), Quaternion.identity);
+            float x = time * noteSpeed + NOTE_START_LINE;
+            var note = 
+                Instantiate(notesObj[inputJson.notes[i].type - 1],
+                    new Vector2(x, -2f * inputJson.notes[i].block + 1f),
+                    Quaternion.identity);
+            // var startUp = new Vector3(x, -2f * inputJson.notes[i].block + 1f + notesObj[1].transform.localScale.y / 2);
+            // var startDown = new Vector3(x, -2f * inputJson.notes[i].block + 1f - notesObj[1].transform.localScale.y / 2);
 
-            if (inputJson.notes[i].block == 0) // 上と下それぞれのリストに格納する
+            if (inputJson.notes[i].block == 0) // 上と下それぞれのリストに入れる
             {
-                UpNoteList.Add(new NoteData()
+                _upNoteList.Add(new NoteData()
                 {
-                    noteType = inputJson.notes[i].type, noteTime = time, noteDuration = noteDuration, noteObj = note
+                    noteType = inputJson.notes[i].type, noteTime = time, noteObj = note
                 });
+                if (inputJson.notes[i].type == 2) // ロングノーツは終わりの時間もリストに入れる
+                {
+                    float finishTime = 
+                        (beatSec * inputJson.notes[i].notes[0].num / inputJson.notes[i].notes[0].LPB) 
+                        + inputJson.offset * 0.01f;
+                    _upNoteList.Add(new NoteData()
+                    {
+                        noteType = NOTE_FINISH_TYPE, noteTime = finishTime,
+                        noteObj = 
+                            Instantiate(notesObj[inputJson.notes[i].type - 1],
+                            new Vector2(finishTime * noteSpeed + NOTE_START_LINE, -2f * inputJson.notes[i].block + 1f),
+                            Quaternion.identity)
+                    });
+                    // var finishUp = new Vector3(finishTime * noteSpeed + NOTE_START_LINE,
+                    //     -2f * inputJson.notes[i].block + 1f + notesObj[1].transform.localScale.y / 2);
+                    // var finishDown = new Vector3(finishTime * noteSpeed + NOTE_START_LINE,
+                    //     -2f * inputJson.notes[i].block + 1f - notesObj[1].transform.localScale.y / 2);
+                    // NoteLineGenerate(startUp, startDown, finishUp, finishDown);
+                }
             }
             else if (inputJson.notes[i].block == 1)
             {
-                DownNoteList.Add(new NoteData()
+                _downNoteList.Add(new NoteData()
                 {
-                    noteType = inputJson.notes[i].type, noteTime = time, noteDuration = noteDuration, noteObj = note
+                    noteType = inputJson.notes[i].type, noteTime = time, noteObj = note
                 });
+                if (inputJson.notes[i].type == 2) // ロングノーツは終わりの時間もリストに入れる
+                {
+                    float finishTime = 
+                        (beatSec * inputJson.notes[i].notes[0].num / inputJson.notes[i].notes[0].LPB) 
+                        + inputJson.offset * 0.01f;
+                    _downNoteList.Add(new NoteData()
+                    {
+                        noteType = inputJson.notes[i].type, noteTime = finishTime,
+                        noteObj = 
+                            Instantiate(notesObj[inputJson.notes[i].type - 1],
+                            new Vector2(finishTime * noteSpeed + NOTE_START_LINE, -2f * inputJson.notes[i].block + 1f),
+                            Quaternion.identity)
+                    });
+                    // var finishUp = new Vector3(finishTime * noteSpeed + NOTE_START_LINE,
+                    //     -2f * inputJson.notes[i].block + 1f + notesObj[1].transform.localScale.y / 2);
+                    // var finishDown = new Vector3(finishTime * noteSpeed + NOTE_START_LINE,
+                    //     -2f * inputJson.notes[i].block + 1f - notesObj[1].transform.localScale.y / 2);
+                    // NoteLineGenerate(startUp, startDown, finishUp, finishDown);
+                }
             }
         }
     }
@@ -118,38 +159,41 @@ public class NotesManager : MonoBehaviour
     {
         if (lane == 0)
         {
-            UpNoteList.RemoveAt(0);
-            UpNoteList.RemoveAt(0);
+            _upNoteList[0].noteObj.SetActive(false);
+            _upNoteList.RemoveAt(0);
         }
         else if (lane == 1)
         {
-            DownNoteList.RemoveAt(0);
-            DownNoteList.RemoveAt(0);
+            _downNoteList[0].noteObj.SetActive(false);
+            _downNoteList.RemoveAt(0);
         }
     }
     
     /// <summary> TapNoteの流れてくる時間を取得する関数 </summary>
+    /// もしなかったら絶対にない値(-1)を返す
     /// <param name="lane"> どっちのレーンか（0 = 上, 1 = 下）</param>
     /// <returns> noteの時間 </returns>
     public float GetTapNotesData(int lane)
     {
         if (lane == 0)
         {
-            for (int i = 0; i < UpNoteList.Count; i++)
+            if (_upNoteList.Count == 0) { return -1; }
+            for (int i = 0; i < _upNoteList.Count; i++)
             {
-                if (UpNoteList[i].noteType == 1)
+                if (_upNoteList[i].noteType == 1)
                 {
-                    return UpNoteList[i].noteTime;
+                    return _upNoteList[i].noteTime;
                 }
             }
         }
         else if (lane == 1)
         {
-            for (int i = 0; i < DownNoteList.Count; i++)
+            if (_downNoteList.Count == 0) { return -1; }
+            for (int i = 0; i < _downNoteList.Count; i++)
             {
-                if (DownNoteList[i].noteType == 1)
+                if (_downNoteList[i].noteType == 1)
                 {
-                    return DownNoteList[i].noteTime;
+                    return _downNoteList[i].noteTime;
                 }
             }
         }
@@ -157,32 +201,70 @@ public class NotesManager : MonoBehaviour
         return -1;
     }
     
-    /// <summary> TapNoteの流れてくる時間を取得する関数 </summary>
+    /// <summary> LongNoteの流れてくる時間を取得する関数 </summary>
+    /// もしなかったら絶対にない値(-1, -1)を返す
     /// <param name="lane"> どっちのレーンか（0 = 上, 1 = 下）</param>
     /// <returns> noteの時間, noteの長さ </returns>
     public (float, float) GetLongNotesData(int lane) 
     {
         if (lane == 0)
         {
-            for (int i = 0; i < UpNoteList.Count; i++)
+            if (_upNoteList.Count == 0) { return (-1, -1); }
+            for (int i = 0; i < _upNoteList.Count; i++)
             {
-                if (UpNoteList[i].noteType == 2)
+                if (_upNoteList[i].noteType == 2)
                 {
-                    return (UpNoteList[i].noteTime, UpNoteList[i].noteDuration);
+                    float noteDuration = _upNoteList[i + 1].noteTime - _upNoteList[i].noteTime;
+                    return (_upNoteList[i].noteTime, noteDuration);
+                }
+
+                if (_upNoteList[i].noteType == NOTE_FINISH_TYPE)
+                {
+                    return (_upNoteList[i].noteTime, -1);
                 }
             }
         }
         else if (lane == 1)
         {
-            for (int i = 0; i < DownNoteList.Count; i++)
+            if (_downNoteList.Count == 0) { return (-1, -1); }
+            for (int i = 0; i < _downNoteList.Count; i++)
             {
-                if (DownNoteList[i].noteType == 2)
+                if (_downNoteList[i].noteType == 2)
                 {
-                    return (DownNoteList[i].noteTime, DownNoteList[i].noteDuration);
+                    float noteDuration = _downNoteList[i + 1].noteTime - _downNoteList[i].noteTime;
+                    return (_downNoteList[i].noteTime, noteDuration);
+                }
+                if (_downNoteList[i].noteType == NOTE_FINISH_TYPE)
+                {
+                    return (_downNoteList[i].noteTime, -1);
                 }
             }
         }
 
         return (-1, -1);
     }
+
+    // /// <summary> ロングノーツのラインの生成 </summary>
+    // /// <param name="startUp"> ロングノーツのはじまりの上 </param>
+    // /// <param name="startDown"> ロングノーツのはじまりの下 </param>
+    // /// <param name="finishUp"> ロングノーツのおわりの上 </param>
+    // /// <param name="finishDown"> ロングノーツのおわりの下 </param>
+    // private void NoteLineGenerate(Vector3 startUp, Vector3 startDown, Vector3 finishUp, Vector3 finishDown)
+    // {
+    //     int[] triangles = new int[6] { 0, 2, 1, 3, 1, 2 };
+    //     var vertices = new Vector3[4];
+    //     vertices[0] = startDown;
+    //     vertices[1] = finishDown;
+    //     vertices[2] = startUp;
+    //     vertices[3] = finishUp;
+    //     GameObject lineObj = new GameObject();
+    //     lineObj.AddComponent<MeshFilter>();
+    //     lineObj.AddComponent<MeshRenderer>();
+    //     lineObj.AddComponent<Notes>();
+    //     Mesh mesh = new Mesh();
+    //     lineObj.GetComponent<MeshFilter>().mesh = mesh;
+    //     mesh.vertices = vertices;
+    //     mesh.triangles = triangles;
+    //     mesh.RecalculateNormals();
+    // }
 }
