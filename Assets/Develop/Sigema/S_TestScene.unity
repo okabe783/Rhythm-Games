@@ -320,6 +320,8 @@ GameObject:
   - component: {fileID: 1328516606}
   - component: {fileID: 1328516605}
   - component: {fileID: 1328516608}
+  - component: {fileID: 1328516609}
+  - component: {fileID: 1328516610}
   m_Layer: 0
   m_Name: TestPlayer
   m_TagString: Untagged
@@ -341,7 +343,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _longPressStartTime: 0.4
   _longPressEndTime: 4
-  _interval: 0.5
 --- !u!114 &1328516606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,6 +397,30 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1328516609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1328516604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3e5dec327be846a55017a8ae5439a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1328516610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1328516604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af2d8eb4e048e9c48bcad446bec8b381, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1639852573
 GameObject:
   m_ObjectHideFlags: 0
