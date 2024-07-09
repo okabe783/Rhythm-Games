@@ -65,7 +65,7 @@ public class NotesManager : MonoBehaviour
         _upNoteList = new List<NoteData>();
         _downNoteList = new List<NoteData>();
         _notesNum = 0;
-        _songName = ""; // 選択された曲名をここに入れる
+        _songName = "aaaa"; // 選択された曲名をここに入れる
         Load(_songName);
     }
 

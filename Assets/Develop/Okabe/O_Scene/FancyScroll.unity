@@ -235,7 +235,7 @@ MonoBehaviour:
   scrollDirection: 1
   movementType: 0
   elasticity: 0.1
-  scrollSensitivity: 5
+  scrollSensitivity: 160
   inertia: 1
   decelerationRate: 0.03
   snap:
