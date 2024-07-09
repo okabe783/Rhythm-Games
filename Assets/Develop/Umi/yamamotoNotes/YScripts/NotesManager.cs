@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 
 /// <summary> ファイルから読み込んだ曲についてのデータ </summary>
@@ -38,13 +39,13 @@ public class NoteData
 public class NotesManager : MonoBehaviour
 {
     [SerializeField, Header("ノーツのスピード")]
-    private float noteSpeed;
+    private float _noteSpeed;
     
     [SerializeField, Header("ノーツの種類")]
-    private List<GameObject> notesObj = new List<GameObject>();
+    private List<GameObject> _notesObj = new List<GameObject>();
     
     [SerializeField, Header("ノーツの生成が始まる場所")]
-    private float NOTE_START_LINE = -4.6f;
+    private float _noteStartLine = -4.6f;
     
     /// <summary> 総ノーツ数 </summary>
     private int _notesNum;
@@ -58,14 +59,14 @@ public class NotesManager : MonoBehaviour
     /// <summary> 下のレーンに流れてくるノーツのリスト </summary>>
     private List<NoteData> _downNoteList;
     
-    private int NOTE_FINISH_TYPE = 3;
+    private int _noteFinishType = 3;
     
     private void OnEnable()
     {
         _upNoteList = new List<NoteData>();
         _downNoteList = new List<NoteData>();
         _notesNum = 0;
-        _songName = "aaaa"; // 選択された曲名をここに入れる
+        _songName = "老賢人の舟"; // 選択された曲名をここに入れる
         Load(_songName);
     }
 
@@ -90,10 +91,10 @@ public class NotesManager : MonoBehaviour
                          + inputJson.offset * 0.01f;
             
             // ノーツの生成
-            float x = time * noteSpeed + NOTE_START_LINE;
+            float x = time * _noteSpeed + _noteStartLine;
             var note = 
-                Instantiate(notesObj[inputJson.notes[i].type - 1],
-                    new Vector2(x, -2f * inputJson.notes[i].block + 1f),
+                Instantiate(_notesObj[inputJson.notes[i].type - 1],
+                    new Vector2(x, -4f * inputJson.notes[i].block + 2f),
                     Quaternion.identity);
             // var startUp = new Vector3(x, -2f * inputJson.notes[i].block + 1f + notesObj[1].transform.localScale.y / 2);
             // var startDown = new Vector3(x, -2f * inputJson.notes[i].block + 1f - notesObj[1].transform.localScale.y / 2);
@@ -111,10 +112,10 @@ public class NotesManager : MonoBehaviour
                         + inputJson.offset * 0.01f;
                     _upNoteList.Add(new NoteData()
                     {
-                        noteType = NOTE_FINISH_TYPE, noteTime = finishTime,
+                        noteType = _noteFinishType, noteTime = finishTime,
                         noteObj = 
-                            Instantiate(notesObj[inputJson.notes[i].type - 1],
-                            new Vector2(finishTime * noteSpeed + NOTE_START_LINE, -2f * inputJson.notes[i].block + 1f),
+                            Instantiate(_notesObj[inputJson.notes[i].type - 1],
+                            new Vector2(finishTime * _noteSpeed + _noteStartLine, -4f * inputJson.notes[i].block + 2f),
                             Quaternion.identity)
                     });
                     // var finishUp = new Vector3(finishTime * noteSpeed + NOTE_START_LINE,
@@ -139,8 +140,8 @@ public class NotesManager : MonoBehaviour
                     {
                         noteType = inputJson.notes[i].type, noteTime = finishTime,
                         noteObj = 
-                            Instantiate(notesObj[inputJson.notes[i].type - 1],
-                            new Vector2(finishTime * noteSpeed + NOTE_START_LINE, -2f * inputJson.notes[i].block + 1f),
+                            Instantiate(_notesObj[inputJson.notes[i].type - 1],
+                            new Vector2(finishTime * _noteSpeed + _noteStartLine, -4f * inputJson.notes[i].block + 2f),
                             Quaternion.identity)
                     });
                     // var finishUp = new Vector3(finishTime * noteSpeed + NOTE_START_LINE,
@@ -218,7 +219,7 @@ public class NotesManager : MonoBehaviour
                     return (_upNoteList[i].noteTime, noteDuration);
                 }
 
-                if (_upNoteList[i].noteType == NOTE_FINISH_TYPE)
+                if (_upNoteList[i].noteType == _noteFinishType)
                 {
                     return (_upNoteList[i].noteTime, -1);
                 }
@@ -234,7 +235,7 @@ public class NotesManager : MonoBehaviour
                     float noteDuration = _downNoteList[i + 1].noteTime - _downNoteList[i].noteTime;
                     return (_downNoteList[i].noteTime, noteDuration);
                 }
-                if (_downNoteList[i].noteType == NOTE_FINISH_TYPE)
+                if (_downNoteList[i].noteType == _noteFinishType)
                 {
                     return (_downNoteList[i].noteTime, -1);
                 }
