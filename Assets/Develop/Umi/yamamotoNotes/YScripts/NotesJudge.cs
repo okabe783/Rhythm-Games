@@ -1,17 +1,18 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 /// <summary> ノーツの判定を行うクラス </summary>
 public class NotesJudge : MonoBehaviour
 {
     [SerializeField, Header("NotesManagerを入れる")]
-    private NotesManager notesManager;
+    private NotesManager _notesManager;
 
     [SerializeField, Header("Perfectの範囲")] 
-    private float PERFECT_TIME = 0.03f;
+    private float _perfectTime = 0.03f;
  
     /// <summary> これ以上だとMiss </summary>
     [SerializeField, Header("Greatの範囲")] 
-    private float GREAT_TIME = 0.05f;
+    private float _greatTime = 0.05f;
     
     /// <summary> 曲が始まった時間 </summary>
     private float _statTime;
@@ -30,36 +31,36 @@ public class NotesJudge : MonoBehaviour
     
     void Update()
     {
-        float upTapNoteTime = notesManager.GetTapNotesData(0);
-        float downTapNoteTime = notesManager.GetTapNotesData(1);
-        float upLongNoteTime = notesManager.GetLongNotesData(0).Item1;
-        float downLongNoteTime = notesManager.GetLongNotesData(1).Item1;
+        float upTapNoteTime = _notesManager.GetTapNotesData(0);
+        float downTapNoteTime = _notesManager.GetTapNotesData(1);
+        float upLongNoteTime = _notesManager.GetLongNotesData(0).Item1;
+        float downLongNoteTime = _notesManager.GetLongNotesData(1).Item1;
         if (upTapNoteTime != -1)
         {
-            if (Time.time - (upTapNoteTime + _statTime) > GREAT_TIME)
+            if (Time.time - (upTapNoteTime + _statTime) > _greatTime)
             {
                 //ToDo:Missの処理
-                notesManager.DeleteNoteData(0);
+                _notesManager.DeleteNoteData(0);
                 Debug.Log("miss");
             }
         }
 
         if (downTapNoteTime != -1)
         {
-            if (Time.time - (downTapNoteTime + _statTime) > GREAT_TIME)
+            if (Time.time - (downTapNoteTime + _statTime) > _greatTime)
             {
                 //ToDo:Missの処理
-                notesManager.DeleteNoteData(1);
+                _notesManager.DeleteNoteData(1);
                 Debug.Log("miss");
             }
         }
         
         if (upLongNoteTime != -1)
         {
-            if (Time.time - (upLongNoteTime + _statTime) > GREAT_TIME)
+            if (Time.time - (upLongNoteTime + _statTime) > _greatTime)
             {
                 //ToDo:Missの処理
-                notesManager.DeleteNoteData(0);
+                _notesManager.DeleteNoteData(0);
                 _longNoteFinishTime = -2;
                 Debug.Log("miss");
             }
@@ -67,10 +68,10 @@ public class NotesJudge : MonoBehaviour
         
         if (downLongNoteTime != -1)
         {
-            if (Time.time - (downLongNoteTime + _statTime) > GREAT_TIME)
+            if (Time.time - (downLongNoteTime + _statTime) > _greatTime)
             {
                 //ToDo:Missの処理
-                notesManager.DeleteNoteData(1);
+                _notesManager.DeleteNoteData(1);
                 _longNoteFinishTime = -2;
                 Debug.Log("miss");
             }
@@ -81,9 +82,9 @@ public class NotesJudge : MonoBehaviour
     /// <param name="getLane"> (0 = 上, 1 = 下) </param>
     public void TapNoteJudge(int getLane)
     {
-        float time = notesManager.GetTapNotesData(getLane);
+        float time = _notesManager.GetTapNotesData(getLane);
         if (time == -1) { return; }
-        if (Time.time <  time + _statTime - GREAT_TIME) { return; } // Greatの判定よりも早かったら判定しない
+        if (Time.time <  time + _statTime - _greatTime) { return; } // Greatの判定よりも早かったら判定しない
         Judgement(Mathf.Abs(Time.time - (time + _statTime)), getLane);
     }
     
@@ -91,9 +92,9 @@ public class NotesJudge : MonoBehaviour
     /// <param name="getLane"> (0 = 上, 1 = 下) </param>
     public void LongNoteStartJudge(int getLane)
     {
-        float time = notesManager.GetLongNotesData(getLane).Item1;
-        if (Time.time <  time + _statTime - GREAT_TIME) { return; } // Greatの判定よりも早かったら判定しない
-        float duration = notesManager.GetLongNotesData(getLane).Item2;
+        float time = _notesManager.GetLongNotesData(getLane).Item1;
+        if (Time.time <  time + _statTime - _greatTime) { return; } // Greatの判定よりも早かったら判定しない
+        float duration = _notesManager.GetLongNotesData(getLane).Item2;
         _longNoteFinishTime = time + duration;
         if (time == -1) { return; }
         _lane = getLane;
@@ -103,13 +104,13 @@ public class NotesJudge : MonoBehaviour
     /// <summary> ロングノーツの終わりの判定 </summary>
     public void LongNoteFinishJudge()
     {
-        float time = notesManager.GetLongNotesData(0).Item1;
+        float time = _notesManager.GetLongNotesData(0).Item1;
         if (_longNoteFinishTime == -2) { return; }
-        if (Time.time - (time + _statTime) < GREAT_TIME)
+        if (Time.time - (time + _statTime) < _greatTime)
         {
             //ToDo:Missの処理
             _longNoteFinishTime = -2;
-            notesManager.DeleteNoteData(_lane);
+            _notesManager.DeleteNoteData(_lane);
             Debug.Log("miss");
         }
         else
@@ -124,16 +125,16 @@ public class NotesJudge : MonoBehaviour
     /// <param name="lane"> どのレーンか </param>
     private void Judgement(float timeLag, int lane)
     {
-        if (timeLag <= PERFECT_TIME)
+        if (timeLag <= _perfectTime)
         {
             // Perfectの処理
-            notesManager.DeleteNoteData(lane);
+            _notesManager.DeleteNoteData(lane);
             Debug.Log("perfect");
         }
-        else if (timeLag <= GREAT_TIME)
+        else if (timeLag <= _greatTime)
         {
             // Greatの処理
-            notesManager.DeleteNoteData(lane);
+            _notesManager.DeleteNoteData(lane);
             Debug.Log("Great");
         }
     }
