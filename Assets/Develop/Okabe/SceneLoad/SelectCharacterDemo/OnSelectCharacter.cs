@@ -9,6 +9,6 @@ public class OnSelectCharacter : MonoBehaviour
     public void OnClickSelectCharacter()
     {
         PlayerPrefs.SetInt("Character",_selectId);
-        SceneLoad.Instance.StartLoad("GameScene");
+        SceneLoad.Instance.StartLongLoad("GameScene");
     }
 }

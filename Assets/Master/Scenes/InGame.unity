@@ -236,11 +236,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43db170c2409121448017567f97e519a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _noteSpeed: 10
+  _noteSpeed: 0
   _notesObj:
-  - {fileID: 3598992444544070995, guid: 1108b000e9f852b4d9e500bd63b0d140, type: 3}
   - {fileID: 838931787211784162, guid: 17ccc3cb74622f049a9106f43e1a3add, type: 3}
-  _noteStartLine: -2.3
+  - {fileID: 3598992444544070995, guid: 1108b000e9f852b4d9e500bd63b0d140, type: 3}
+  _noteStartLine: 79.9
 --- !u!4 &53658021
 Transform:
   m_ObjectHideFlags: 0
