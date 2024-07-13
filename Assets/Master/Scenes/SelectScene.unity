@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _musicScrollView: {fileID: 1928215110}
+  _soundTableList: {fileID: 11400000, guid: 00b11cb1f9b83114d9b250bfc8490eda, type: 2}
 --- !u!114 &523525708
 MonoBehaviour:
   m_ObjectHideFlags: 0
