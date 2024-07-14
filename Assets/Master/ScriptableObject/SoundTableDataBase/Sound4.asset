@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Sound4
   m_EditorClassIdentifier: 
   <TableId>k__BackingField: 0
-  <PreviewTime>k__BackingField: 0
+  <PreviewTime>k__BackingField: 4
   <SoundName>k__BackingField: "\u304B\u304D\u306C\u307E"
   <SelectScene>k__BackingField: 
