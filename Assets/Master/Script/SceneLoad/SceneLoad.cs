@@ -1,8 +1,6 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UniRx;
 
 /// <summary>Sceneを遷移させる</summary>
 public class SceneLoad : MonoBehaviour
