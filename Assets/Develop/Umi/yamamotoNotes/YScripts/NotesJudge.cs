@@ -6,7 +6,7 @@ public class NotesJudge : MonoBehaviour
 {
     [SerializeField, Header("NotesManagerを入れる")]
     private NotesManager _notesManager;
-
+    
     [SerializeField, Header("Perfectの範囲")] 
     private float _perfectTime = 0.03f;
  
@@ -95,8 +95,8 @@ public class NotesJudge : MonoBehaviour
         float time = _notesManager.GetLongNotesData(getLane).Item1;
         if (Time.time <  time + _statTime - _greatTime) { return; } // Greatの判定よりも早かったら判定しない
         float duration = _notesManager.GetLongNotesData(getLane).Item2;
+        if (duration == -1) { return; }
         _longNoteFinishTime = time + duration;
-        if (time == -1) { return; }
         _lane = getLane;
         Judgement(Mathf.Abs(Time.time - (time + _statTime)), getLane);
     }
