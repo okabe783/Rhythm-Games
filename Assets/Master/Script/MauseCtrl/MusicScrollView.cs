@@ -29,7 +29,14 @@ internal class MusicScrollView : FancyScrollView<MusicItemData,Context>
     [SerializeField] private GameObject _cellPrefab; //セルのプレハブ
 
     private Action<MusicItemData> _onSelectionChanged;
+
+    private SelectData _selectData;
     protected override GameObject CellPrefab => _cellPrefab;
+
+    private void Start()
+    {
+        _selectData = ScriptableObject.CreateInstance<SelectData>();
+    }
 
     //スクロールの位置が変わるたびにUpdatePositionが呼ばれるように設定
     protected override void Initialize()
@@ -65,6 +72,20 @@ internal class MusicScrollView : FancyScrollView<MusicItemData,Context>
     public void OnSelectionChanged(Action<MusicItemData> callback)
     {
         _onSelectionChanged = callback;
+    }
+    
+    //セルが所持している曲のDataを保存してシーンを遷移
+    public void OnSelectSell()
+    {
+        if (Context._selectIndex >= 0 && Context._selectIndex < ItemsSource.Count)
+        {
+            _selectData.ItemData = ItemsSource[Context._selectIndex];
+            Debug.Log($"Saved selected music data: {_selectData.ItemData.SoundName}");
+
+            // ToDo:ここでシーンの遷移などの処理を実行する
+        }
+        else
+            Debug.LogError("No music data selected to save.");
     }
 
     //次のセルを選択
