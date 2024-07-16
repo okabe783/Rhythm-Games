@@ -322,6 +322,7 @@ GameObject:
   - component: {fileID: 1328516608}
   - component: {fileID: 1328516609}
   - component: {fileID: 1328516610}
+  - component: {fileID: 1328516611}
   m_Layer: 0
   m_Name: TestPlayer
   m_TagString: Untagged
@@ -342,7 +343,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _longPressStartTime: 0.4
-  _longPressEndTime: 4
 --- !u!114 &1328516606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -421,6 +421,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af2d8eb4e048e9c48bcad446bec8b381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1328516611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1328516604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c078e222726796745b07b88b40dd72f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _selectData: {fileID: 11400000, guid: cd2535bb64d07ee4c8cfeb6f32ff7044, type: 2}
+  _characterDataBaseList: {fileID: 11400000, guid: cec8f87ba6dfcc842b8979da011db8d0, type: 2}
 --- !u!1 &1639852573
 GameObject:
   m_ObjectHideFlags: 0

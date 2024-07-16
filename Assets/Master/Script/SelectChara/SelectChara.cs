@@ -5,6 +5,8 @@ using UnityEngine;
 /// </summary>
 public class SelectChara : MonoBehaviour
 {
+    [SerializeField] private SelectData _selectData; 
+    
     /// <summary>
     /// IDをボタンで設定する必要がある
     /// </summary>
@@ -12,10 +14,12 @@ public class SelectChara : MonoBehaviour
     public void OnClick(int id)
     {
         // todo: 保存クラスに保存
-        //
+        _selectData._characterId = id;
         Debug.Log($"キャラID : {id} を保存します。");
         // todo: 保存クラスからロードするシーン名を受け取る
-        //
-        //SceneLoad.Instance.StartLongLoad("***");
+        var sceneName = _selectData.ItemData.SelectScene;
+        Debug.Log(sceneName);
+
+        SceneLoad.Instance.StartLongLoad(sceneName);
     }
 }

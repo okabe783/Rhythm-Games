@@ -13,8 +13,6 @@ public class SceneLoad : MonoBehaviour
 
     private AsyncOperation _async;　// ロードの進捗状況を管理するための変数
 
-    //ToDo:UniRxで依存せずにsceneを呼び出す
-
     private void Awake()
     {
         Instance = this;
@@ -22,21 +20,22 @@ public class SceneLoad : MonoBehaviour
 
     private void Start()
     {
-        // sceneLoadHandler.Subscribe(StartShortLoad).AddTo(this);
-        // SceneManager.sceneLoaded += NewMethod;
+        SceneManager.LoadScene("TitleScene", LoadSceneMode.Additive); //複数シーンを同時に開く
     }
 
-    private void OnDestroy()
+    public void OnChangeSelectMusicScene()
     {
-        SceneManager.sceneLoaded -= NewMethod;
+        SceneManager.LoadScene("SelectMusicScene", LoadSceneMode.Additive);
+        SceneManager.UnloadSceneAsync("TitleScene");
     }
 
-    private void NewMethod(Scene scene, LoadSceneMode mode)
+    public void OnChangeSelectCharaScene()
     {
-        // シーンが読み込まれたときに呼び出される。
+        SceneManager.LoadScene("SelectChara", LoadSceneMode.Additive);
+        SceneManager.UnloadSceneAsync("SelectMusicScene");
     }
 
-    // Loading中にUIを表示するメソッド
+// Loading中にUIを表示するメソッド
     public void StartLongLoad(string sceneName)
     {
         StartCoroutine(InGameLoad(sceneName));
@@ -48,7 +47,7 @@ public class SceneLoad : MonoBehaviour
         NormalLoading(sceneName);
     }
 
-    //非同期でシーンをロードする
+//InGameシーンをロードするときはこっちを使う
     private IEnumerator InGameLoad(string sceneName)
     {
         var setUI = Instantiate(_loadingUI); //Uiを表示
@@ -63,7 +62,7 @@ public class SceneLoad : MonoBehaviour
         Destroy(setUI);
     }
 
-    //InGameに突入する以外のシーンの遷移はこっちで行う
+//InGameに突入する以外のシーンの遷移はこっちで行う
     private void NormalLoading(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
