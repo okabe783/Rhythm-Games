@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Character 2
   m_EditorClassIdentifier: 
   _icon: {fileID: 0}
-  _characterId: 0
+  _characterId: 2
   _hp: 0
