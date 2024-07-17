@@ -95,8 +95,8 @@ public class NotesManager : MonoBehaviour
             var note = 
                 Instantiate(_notesObj[inputJson.notes[i].type - 1],
                     new Vector2(x, y), Quaternion.identity);
-            // var startUp = new Vector3(x, y + _notesObj[1].transform.localScale.y / 2);
-            // var startDown = new Vector3(x, y - _notesObj[1].transform.localScale.y / 2);
+            var startUp = new Vector3(x, y + _notesObj[1].transform.localScale.y / 2);
+            var startDown = new Vector3(x, y - _notesObj[1].transform.localScale.y / 2);
 
             if (inputJson.notes[i].block == 0) // 上と下それぞれのリストに入れる
             {
@@ -117,11 +117,11 @@ public class NotesManager : MonoBehaviour
                             new Vector2(finishTime * _noteSpeed + _noteStartLine, y),
                             Quaternion.identity)
                     });
-                    // var finishUp = new Vector3(finishTime * _noteSpeed + _noteStartLine,
-                    //     y + _notesObj[1].transform.localScale.y / 2);
-                    // var finishDown = new Vector3(finishTime * _noteSpeed + _noteStartLine,
-                    //     y - _notesObj[1].transform.localScale.y / 2);
-                    // NoteLineGenerate(startUp, startDown, finishUp, finishDown);
+                    var finishUp = new Vector3(finishTime * _noteSpeed + _noteStartLine,
+                        y + _notesObj[1].transform.localScale.y / 2);
+                    var finishDown = new Vector3(finishTime * _noteSpeed + _noteStartLine,
+                        y - _notesObj[1].transform.localScale.y / 2);
+                    NoteLineGenerate(startUp, startDown, finishUp, finishDown);
                 }
             }
             else if (inputJson.notes[i].block == 1)
@@ -143,11 +143,11 @@ public class NotesManager : MonoBehaviour
                             new Vector2(finishTime * _noteSpeed + _noteStartLine, y),
                             Quaternion.identity)
                     });
-                    // var finishUp = new Vector3(finishTime * _noteSpeed + _noteStartLine,
-                    //     y + _notesObj[1].transform.localScale.y / 2);
-                    // var finishDown = new Vector3(finishTime * _noteSpeed + _noteStartLine,
-                    //     y - _notesObj[1].transform.localScale.y / 2);
-                    // NoteLineGenerate(startUp, startDown, finishUp, finishDown);
+                    var finishUp = new Vector3(finishTime * _noteSpeed + _noteStartLine,
+                        y + _notesObj[1].transform.localScale.y / 2);
+                    var finishDown = new Vector3(finishTime * _noteSpeed + _noteStartLine,
+                        y - _notesObj[1].transform.localScale.y / 2);
+                    NoteLineGenerate(startUp, startDown, finishUp, finishDown);
                 }
             }
         }
@@ -245,30 +245,29 @@ public class NotesManager : MonoBehaviour
         return (-1, -1);
     }
 
-    // /// <summary> ロングノーツのラインの生成 </summary>
-    // /// <param name="startUp"> ロングノーツのはじまりの上 </param>
-    // /// <param name="startDown"> ロングノーツのはじまりの下 </param>
-    // /// <param name="finishUp"> ロングノーツのおわりの上 </param>
-    // /// <param name="finishDown"> ロングノーツのおわりの下 </param>
-    // private void NoteLineGenerate(Vector3 startUp, Vector3 startDown, Vector3 finishUp, Vector3 finishDown)
-    // {
-    //     int[] triangles = new int[6] { 0, 2, 1, 3, 1, 2 };
-    //     var vertices = new Vector3[4];
-    //     vertices[0] = new Vector3(-(finishDown.x - startDown.x), -(finishUp.y - startDown.y));
-    //     vertices[1] = new Vector3(0, -(finishUp.y - finishDown.y));
-    //     vertices[2] = new Vector3(-(finishUp.x - startUp.x), 0);
-    //     vertices[3] = Vector3.zero;
-    //     GameObject lineObj = new GameObject();
-    //     lineObj.AddComponent<MeshFilter>();
-    //     lineObj.AddComponent<MeshRenderer>();
-    //     lineObj.AddComponent<Notes>();
-    //     lineObj.AddComponent<DeleteLongNoteLine>();
-    //     lineObj.GetComponent<DeleteLongNoteLine>()._x = startUp.x;
-    //     Mesh mesh = new Mesh();
-    //     lineObj.GetComponent<MeshFilter>().mesh = mesh;
-    //     mesh.vertices = vertices;
-    //     mesh.triangles = triangles;
-    //     mesh.RecalculateNormals();
-    //     lineObj.transform.position = finishUp;
-    // }
+    /// <summary> ロングノーツのラインの生成 </summary>
+    /// <param name="startUp"> ロングノーツのはじまりの上 </param>
+    /// <param name="startDown"> ロングノーツのはじまりの下 </param>
+    /// <param name="finishUp"> ロングノーツのおわりの上 </param>
+    /// <param name="finishDown"> ロングノーツのおわりの下 </param>
+    private void NoteLineGenerate(Vector3 startUp, Vector3 startDown, Vector3 finishUp, Vector3 finishDown)
+    {
+        int[] triangles = new int[6] { 0, 2, 1, 3, 1, 2 };
+        var vertices = new Vector3[4];
+        vertices[0] = new Vector3(-(finishDown.x - startDown.x), -(finishUp.y - startDown.y));
+        vertices[1] = new Vector3(0, -(finishUp.y - finishDown.y));
+        vertices[2] = new Vector3(-(finishUp.x - startUp.x), 0);
+        vertices[3] = Vector3.zero;
+        GameObject lineObj = new GameObject();
+        lineObj.AddComponent<MeshFilter>();
+        lineObj.AddComponent<MeshRenderer>();
+        lineObj.AddComponent<Notes>();
+        lineObj.AddComponent<DeleteLongNoteLine>();
+        Mesh mesh = new Mesh();
+        lineObj.GetComponent<MeshFilter>().mesh = mesh;
+        mesh.vertices = vertices;
+        mesh.triangles = triangles;
+        mesh.RecalculateNormals();
+        lineObj.transform.position = finishUp;
+    }
 }
