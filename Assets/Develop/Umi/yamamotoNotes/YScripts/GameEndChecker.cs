@@ -50,6 +50,7 @@ public class GameEndChecker : MonoBehaviour
 
     private void SceneChange()
     {
-        SceneManager.LoadScene("Result");
+        SceneLoad.Instance.OnChangeScene("Result","InGame");
     }
 }
+

@@ -23,16 +23,10 @@ public class SceneLoad : MonoBehaviour
         SceneManager.LoadScene("TitleScene", LoadSceneMode.Additive); //複数シーンを同時に開く
     }
 
-    public void OnChangeSelectMusicScene()
+    public void OnChangeScene(string sceneName,string unloadScene)
     {
-        SceneManager.LoadScene("SelectMusicScene", LoadSceneMode.Additive);
-        SceneManager.UnloadSceneAsync("TitleScene");
-    }
-
-    public void OnChangeSelectCharaScene()
-    {
-        SceneManager.LoadScene("SelectChara", LoadSceneMode.Additive);
-        SceneManager.UnloadSceneAsync("SelectMusicScene");
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+        SceneManager.UnloadSceneAsync(unloadScene);
     }
 
 // Loading中にUIを表示するメソッド
