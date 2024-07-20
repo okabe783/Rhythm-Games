@@ -93,7 +93,7 @@ public class NotesJudge : MonoBehaviour
     public void LongNoteStartJudge(int getLane)
     {
         float time = _notesManager.GetLongNotesData(getLane).Item1;
-        if (Time.time <  time + _statTime - _greatTime) { return; } // Greatの判定よりも早かったら判定しない
+        if (Time.time < time + _statTime - _greatTime) { return; } // Greatの判定よりも早かったら判定しない
         float duration = _notesManager.GetLongNotesData(getLane).Item2;
         if (duration == -1) { return; }
         _longNoteFinishTime = time + duration;
@@ -104,9 +104,9 @@ public class NotesJudge : MonoBehaviour
     /// <summary> ロングノーツの終わりの判定 </summary>
     public void LongNoteFinishJudge()
     {
-        float time = _notesManager.GetLongNotesData(0).Item1;
+        float time = _notesManager.GetLongNotesData(_lane).Item1;
         if (_longNoteFinishTime == -2) { return; }
-        if (Time.time - (time + _statTime) < _greatTime)
+        if (Time.time < time + _statTime - _greatTime)
         {
             //ToDo:Missの処理
             _longNoteFinishTime = -2;
@@ -115,8 +115,8 @@ public class NotesJudge : MonoBehaviour
         }
         else
         {
-            _longNoteFinishTime = -2;
             Judgement(Mathf.Abs(Time.time - (_longNoteFinishTime + _statTime)), _lane);
+            _longNoteFinishTime = -2;
         }
     }
 
