@@ -10,8 +10,10 @@ public class PlayerMove : MonoBehaviour, IPlayerMove, IPlayerInput
     [Header("上レーン"), SerializeField] private GameObject _lane = default;
     [Header("上下移動の速度"), SerializeField] private float _speed = 1;
     [Header("到達したと見做す距離"), SerializeField] private float _distance = 0.1f;
-    [Header("滞空時間 0:ワンクリック、1:ロングノーツ"), SerializeField] 
+
+    [Header("滞空時間 0:ワンクリック、1:ロングノーツ"), SerializeField]
     private float[] _durationFlights = default;
+
     private Vector2 _upperLanePos = default; // 上レーンの場所
     private Vector2 _lowerLanePos = default; // 下レーンの場所
     private Vector2 _middleLanePos = default; // 中間の場所
@@ -50,14 +52,14 @@ public class PlayerMove : MonoBehaviour, IPlayerMove, IPlayerInput
     /// </summary>
     public void VerticalMovement()
     {
-        if (_toUpper)
-        {
-            _targetPos = _upperLanePos;
-            _timers[0] += Time.deltaTime;
-        }
-        else if (_toMiddle)
+        if (_toMiddle)
         {
             _targetPos = _middleLanePos;
+            _timers[0] += Time.deltaTime;
+        }
+        else if (_toUpper)
+        {
+            _targetPos = _upperLanePos;
             _timers[0] += Time.deltaTime;
         }
         else _targetPos = _lowerLanePos;
@@ -69,7 +71,10 @@ public class PlayerMove : MonoBehaviour, IPlayerMove, IPlayerInput
         }
 
         if (!_isReach && !_isFixation)
-            transform.position = Vector2.MoveTowards(transform.position, _targetPos, Speed * Time.deltaTime);
+        {
+            var pos = transform.position;
+            transform.position = new Vector3(pos.x, _targetPos.y, pos.z);
+        }
     }
 
     /// <summary>
@@ -86,18 +91,20 @@ public class PlayerMove : MonoBehaviour, IPlayerMove, IPlayerInput
     public void InputUpper()
     {
         _toUpper = true;
+        // Debug.Log("upper true");
     }
 
     public void InputUpperAndLower()
     {
         _toMiddle = true;
     }
-    
+
     public void InputLower()
     {
         DownwardMovement();
+        // Debug.Log("lower true");
     }
-    
+
     // ロングノーツ中はレーン移動ができないように制限。
     public void InputLongPressStart()
     {
