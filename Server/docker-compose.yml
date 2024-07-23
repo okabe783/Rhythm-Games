@@ -1,0 +1,22 @@
+services:
+  os:
+    container_name: ubuntu
+    build:
+      context: .
+      dockerfile: ./os/Dockerfile
+  db:
+    container_name: db
+    build:
+      context: .
+      dockerfile: ./db/Dockerfile
+    environment:
+      MARIADB_ROOT_PASSWORD: okaberoot
+      MARIADB_DATABASE: RANKING
+      MARIADB_USER: okabe
+      MARIADB_PASSWORD: okabe
+      TZ: 'Asia/Tokyo'
+    volumes:
+      - ./db/data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    ports:
+      - 3306:3306
