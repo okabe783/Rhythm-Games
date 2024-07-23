@@ -5,17 +5,12 @@ using UnityEngine;
 /// </summary>
 public class PlayerAnimation : MonoBehaviour, IPlayerInput
 {
-    private Animator _animator = default;
+    [SerializeField] private Animator _animator = default;
     private static readonly int Attack1 = Animator.StringToHash("Attack1");
     private static readonly int Attack2 = Animator.StringToHash("Attack2");
     private static readonly int Attack3 = Animator.StringToHash("Attack3");
     private static readonly int Hit = Animator.StringToHash("Hit");
     private static readonly int Death = Animator.StringToHash("Death");
-
-    private void Start()
-    {
-        _animator = GetComponent<Animator>();
-    }
 
     // todo:Attack1~2をどう決めるかは未定
     public void InputUpper()
