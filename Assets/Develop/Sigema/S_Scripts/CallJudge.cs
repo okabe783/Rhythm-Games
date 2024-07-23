@@ -30,7 +30,7 @@ public class CallJudge : MonoBehaviour, IPlayerInput
 
     public void InputLongPressStart()
     {
-        if (Input.GetKey(KeyCode.K)) _notesJudge.LongNoteStartJudge(0);
+        if (Input.GetKey(KeyCode.F)) _notesJudge.LongNoteStartJudge(0);
         if (Input.GetKey(KeyCode.J)) _notesJudge.LongNoteStartJudge(1);
     }
 
