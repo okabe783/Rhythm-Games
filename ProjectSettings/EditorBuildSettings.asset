@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Master/Scenes/Master.unity
+    guid: 4dd1c35f639b0b944aff45e63289a483
+  - enabled: 1
     path: Assets/Master/Scenes/TitleScene.unity
     guid: 2c8c9cca24e55f3499698035318aa1ab
   - enabled: 1
@@ -17,4 +20,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Master/Scenes/InGame.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Master/Scenes/InGame/Stage1.unity
+    guid: f38da1d07683e8945b13ec5607535746
+  - enabled: 1
+    path: Assets/Master/Scenes/InGame/Stage2.unity
+    guid: 6c4fbe9befd84dd41ba4c0052f304c20
+  - enabled: 1
+    path: Assets/Master/Scenes/InGame/Stage3.unity
+    guid: 1a5fabdcec6a312479479178a48308ef
+  - enabled: 1
+    path: Assets/Master/Scenes/Result.unity
+    guid: 7e775094864e4a7478af0f59f31fc5df
   m_configObjects: {}

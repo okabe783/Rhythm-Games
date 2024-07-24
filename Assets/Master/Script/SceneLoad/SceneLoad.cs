@@ -45,7 +45,7 @@ public class SceneLoad : MonoBehaviour
     private IEnumerator InGameLoad(string sceneName)
     {
         var setUI = Instantiate(_loadingUI); //Uiを表示
-        _async = SceneManager.LoadSceneAsync(sceneName);
+        _async = SceneManager.LoadSceneAsync(sceneName,LoadSceneMode.Additive);
 
         // ロードが完了するまで待機する
         while (!_async.isDone)
