@@ -293,7 +293,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 160b8be0574b4b047b7c4887b5c920df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _criManager: {fileID: 1267178936}
 --- !u!4 &1066364894
 Transform:
   m_ObjectHideFlags: 0
@@ -318,7 +317,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1267178937}
-  - component: {fileID: 1267178936}
+  - component: {fileID: 1267178938}
   m_Layer: 0
   m_Name: CriSoundManager
   m_TagString: Untagged
@@ -326,7 +325,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1267178936
+--- !u!4 &1267178937
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267178935}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1267178938
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -342,13 +356,43 @@ MonoBehaviour:
   _cueSheetBGM: CueSheet_BGM
   _awbPathBGM: CueSheet_BGM
   _cueSheetSE: CueSheet_SE
---- !u!4 &1267178937
+--- !u!1 &1396189431
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1396189433}
+  - component: {fileID: 1396189432}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1396189432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396189431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25126f0c966870247a7b335274400e9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundTable: {fileID: 11400000, guid: 380d2440e6ef7e942a75d588132b0266, type: 2}
+--- !u!4 &1396189433
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1267178935}
+  m_GameObject: {fileID: 1396189431}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -531,3 +575,4 @@ SceneRoots:
   - {fileID: 468388790}
   - {fileID: 1267178937}
   - {fileID: 1066364894}
+  - {fileID: 1396189433}
