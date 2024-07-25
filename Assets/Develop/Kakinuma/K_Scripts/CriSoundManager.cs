@@ -11,6 +11,9 @@ using UnityEngine;
 /// </summary>
 public class CriSoundManager : MonoBehaviour
 {
+    // シングルトン化
+    public static CriSoundManager Instance { get; private set; }
+    
     [SerializeField, Tooltip("ACFファイルの名前")]
     private string _streamingAssetsAcf;
 
@@ -22,7 +25,10 @@ public class CriSoundManager : MonoBehaviour
 
     [SerializeField, Header("SEのキューシートの名前")]
     private string _cueSheetSE; // .acb
-
+    /*static CriSoundManager _instance = new CriSoundManager();
+    public static CriSoundManager Instance => _instance;
+    private CriSoundManager() { }*/
+    
 #region "CriAtomExPLayerとそれぞれのデータ"
 
     // BGM
@@ -54,6 +60,8 @@ public class CriSoundManager : MonoBehaviour
     
     /// <summary>SEボリュームが変更された際に呼ばれるEvent</summary>
     public Action<float> SEVolumeChanged;
+    
+    //キューシートを取得
 
 #endregion
 
@@ -110,6 +118,8 @@ public class CriSoundManager : MonoBehaviour
     
     private void Awake()
     {
+        Instance = this;
+        
         // acfを設定する
         string path = Application.streamingAssetsPath + $"/{_streamingAssetsAcf}.acf";
         CriAtomEx.RegisterAcf(null, path);
@@ -210,7 +220,7 @@ public class CriSoundManager : MonoBehaviour
     /// <param name="volume">音量</param>
     public void PlayBGM(string cueName, float volume = 1f)
     {
-        var newBGMData = new CriPlayerData();
+        var bgmData = new CriPlayerData();
         var cueSheet = CriAtom.GetCueSheet(_cueSheetBGM);
         
         if (cueSheet == null)
@@ -225,28 +235,46 @@ public class CriSoundManager : MonoBehaviour
         {
             Debug.LogError("ACBがnullです。 BGMが再生できません。");
             return;
-        }        
+        }
+
+        if (!tempAcb.GetCueInfo(cueName, out var info))
+        {
+            Debug.LogError($"{cueName}という名前のキューが存在しません");
+            return;
+        }
+
+        bgmData.CueInfo = info;
+        
+        // ToDo:後で消す
+        //Debug.Log($"BGMData{bgmData.Playback.IsPaused()}"); //使わない
+        if (_bgmLoopPlayer.IsPaused())
+        {
+            Debug.Log("ポーズ中");
+        }
         
         // 同じBGMを再生しようとした時は何もしない
-        if (_currentBGMAcb == tempAcb && _currentBGMCueName == cueName &&
-            _bgmPlayer.GetStatus() == CriAtomExPlayer.Status.Playing)
+        if (_currentBGMAcb == tempAcb && _currentBGMCueName == cueName)
         {
-            return;
+            if(_bgmPlayer.GetStatus() == CriAtomExPlayer.Status.Playing || _bgmLoopPlayer.GetStatus() == CriAtomExPlayer.Status.Playing)
+            {
+                return;
+            }
         }
 
         StopBGM();  // 曲セレクト時にプレビューを流す場合は変更が必要
 
-        if (newBGMData.IsLoop)
+        if (bgmData.IsLoop)
         {
             _bgmLoopPlayer.SetCue(tempAcb, cueName);
             _bgmLoopPlayer.SetVolume(volume * _bgmVolume * _masterVolume);
-            newBGMData.Playback = _bgmLoopPlayer.Start();
+            bgmData.Playback = _bgmLoopPlayer.Start();
+            Debug.Log("ループ音源です");
         }
         else
         {
             _bgmPlayer.SetCue(tempAcb, cueName);
             _bgmPlayer.SetVolume(volume * _bgmVolume * _masterVolume);
-            _bgmData.Playback = _bgmPlayer.Start();
+            bgmData.Playback = _bgmPlayer.Start();
         }
         _currentBGMAcb = tempAcb;
         _currentBGMCueName = cueName;    
@@ -277,6 +305,7 @@ public class CriSoundManager : MonoBehaviour
     public void StopBGM()
     {
         // if文いらないかも？
+        ResumeBGM();    // 一時停止解除
         if (_bgmPlayer.GetStatus() == CriAtomExPlayer.Status.Playing)
         {
             _bgmPlayer.Stop();
@@ -312,6 +341,12 @@ public class CriSoundManager : MonoBehaviour
         if (tempAcb == null)
         {
             Debug.LogWarning("ACBがNullです。");
+            return -1;
+        }
+        
+        if (!tempAcb.GetCueInfo(cueName, out _))
+        {
+            Debug.LogError($"{cueName}という名前のキューが存在しません");
             return -1;
         }
         
@@ -352,7 +387,7 @@ public class CriSoundManager : MonoBehaviour
     public void StopSE(int index)
     {
         if (index < 0) return;
-
+        ResumeSE(index);    // 一時停止解除 
         // if文いらないかも？
         if (_sePlayer.GetStatus() == CriAtomExPlayer.Status.Playing)
         {
