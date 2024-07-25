@@ -20,6 +20,6 @@ public class SelectChara : MonoBehaviour
         var sceneName = _selectData.ItemData.SelectScene;
         Debug.Log(sceneName);
 
-        SceneLoad.Instance.StartLongLoad(sceneName);
+        SceneLoad.Instance.StartLongLoad(sceneName,"SelectChara");
     }
 }
