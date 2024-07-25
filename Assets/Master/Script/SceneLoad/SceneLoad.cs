@@ -30,9 +30,9 @@ public class SceneLoad : MonoBehaviour
     }
 
 // Loading中にUIを表示するメソッド
-    public void StartLongLoad(string sceneName)
+    public void StartLongLoad(string sceneName,string unloadScene)
     {
-        StartCoroutine(InGameLoad(sceneName));
+        StartCoroutine(InGameLoad(sceneName,unloadScene));
     }
 
     /// <summary>UIを表示しないシーンのロード</summary>
@@ -42,10 +42,11 @@ public class SceneLoad : MonoBehaviour
     }
 
 //InGameシーンをロードするときはこっちを使う
-    private IEnumerator InGameLoad(string sceneName)
+    private IEnumerator InGameLoad(string sceneName,string unloadScene)
     {
         var setUI = Instantiate(_loadingUI); //Uiを表示
         _async = SceneManager.LoadSceneAsync(sceneName,LoadSceneMode.Additive);
+        SceneManager.UnloadSceneAsync(unloadScene);
 
         // ロードが完了するまで待機する
         while (!_async.isDone)
