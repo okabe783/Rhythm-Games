@@ -11,10 +11,15 @@ type User struct {
 	Name string `json:"Name"`
 }
 
+type Test struct {
+	gorm.Model
+	Name string `json:"Name"`
+}
+
 func main() {
 	db := dbInit()
 
-	initErr := db.AutoMigrate(&User{})
+	initErr := db.AutoMigrate(&User{}, &Test{})
 	if initErr != nil {
 		panic(initErr)
 	}
@@ -54,6 +59,17 @@ func main() {
 		c.JSON(200, user)
 	})
 
+	// DBへデータ追加
+	r.POST("/test", func(c *gin.Context) {
+		var test Test
+		err := c.BindJSON(&test)
+		if err != nil {
+			panic(err)
+		}
+		db.Create(&test)
+		c.JSON(200, test)
+	})
+
 	err := r.Run(":8080")
 	if err != nil {
 		panic(err)
@@ -62,7 +78,7 @@ func main() {
 
 func dbInit() *gorm.DB {
 	// MariaDBのランキングDBに接続
-	dsn := "okabe:okabe@/RANKING"
+	dsn := "okabe:okabe@(localhost:3306)/RANKING"
 	// mySqlのドライバの初期化
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
