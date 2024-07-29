@@ -1,9 +1,4 @@
 services:
-  os:
-    container_name: ubuntu
-    build:
-      context: .
-      dockerfile: ./os/Dockerfile
   db:
     container_name: db
     build:
@@ -20,3 +15,13 @@ services:
     command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     ports:
       - 3306:3306
+  app:
+    container_name: golang
+    build:
+      context: .
+      dockerfile: ./go/Dockerfile
+    ports:
+      - 8080:8080
+    tty: true
+    stdin_open: true
+    

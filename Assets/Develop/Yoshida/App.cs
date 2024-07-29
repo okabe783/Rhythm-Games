@@ -9,6 +9,12 @@ public struct User
     public string Name;
 }
 
+public struct Test
+{
+    public int ID;
+    public string Hoge;
+}
+
 public class App : MonoBehaviour
 {
     private string _baseUrl = "http://localhost:8080";
