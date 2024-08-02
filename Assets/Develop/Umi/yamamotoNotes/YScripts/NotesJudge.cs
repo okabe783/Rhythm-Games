@@ -4,6 +4,10 @@ using UnityEngine.Serialization;
 /// <summary> ノーツの判定を行うクラス </summary>
 public class NotesJudge : MonoBehaviour
 {
+    [SerializeField] private GameObject _player = default;
+    [SerializeField, Header("ダメージ量")] private int _damageValue = 1;
+    private IDamage _damage = default;
+    
     [SerializeField, Header("NotesManagerを入れる")]
     private NotesManager _notesManager;
     
@@ -25,6 +29,7 @@ public class NotesJudge : MonoBehaviour
     
     void Start()
     {
+        _damage = _player.GetComponent<IDamage>();
         _statTime = Time.time;
         _longNoteFinishTime = -2;
     }
@@ -42,6 +47,7 @@ public class NotesJudge : MonoBehaviour
                 //ToDo:Missの処理
                 _notesManager.DeleteNoteData(0);
                 Debug.Log("miss");
+                _damage.Damage(_damageValue);
             }
         }
 
@@ -52,6 +58,7 @@ public class NotesJudge : MonoBehaviour
                 //ToDo:Missの処理
                 _notesManager.DeleteNoteData(1);
                 Debug.Log("miss");
+                _damage.Damage(_damageValue);
             }
         }
         
@@ -63,6 +70,7 @@ public class NotesJudge : MonoBehaviour
                 _notesManager.DeleteNoteData(0);
                 _longNoteFinishTime = -2;
                 Debug.Log("miss");
+                _damage.Damage(_damageValue);
             }
         }
         
@@ -74,6 +82,7 @@ public class NotesJudge : MonoBehaviour
                 _notesManager.DeleteNoteData(1);
                 _longNoteFinishTime = -2;
                 Debug.Log("miss");
+                _damage.Damage(_damageValue);
             }
         }
     }
@@ -112,6 +121,7 @@ public class NotesJudge : MonoBehaviour
             _longNoteFinishTime = -2;
             _notesManager.DeleteNoteData(_lane);
             Debug.Log("miss");
+            _damage.Damage(_damageValue);
         }
         else
         {
