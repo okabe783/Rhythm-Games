@@ -61,6 +61,7 @@ internal class MusicScrollView : FancyScrollView<MusicItemData,Context>
         //新しいデータを設定してスクロールの総数を更新
         UpdateContents(items);
         _scroller.SetTotalCount(items.Count);
+        CriSoundManager.Instance.PlaySE("SE_Scroll");
     }
 
     //選択が変更された時に呼び出される
