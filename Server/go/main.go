@@ -78,7 +78,7 @@ func main() {
 
 func dbInit() *gorm.DB {
 	// MariaDBのランキングDBに接続
-	dsn := "okabe:okabe@(localhost:3306)/RANKING"
+	dsn := "root:okaberoot@(db)/RANKING"
 	// mySqlのドライバの初期化
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
