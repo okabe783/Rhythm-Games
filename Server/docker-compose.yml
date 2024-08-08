@@ -1,4 +1,14 @@
 services:
+  gcloud:
+    image: google/cloud-sdk:alpine
+    volumes:
+      - .:/usr/src
+      - gcloud_config_data:/root/.config/gcloud
+    working_dir: /usr/src
+    entrypoint: bash
+    tty: true
+    stdin_open: true
+    command: go run main.go
   db:
     container_name: db
     build:
@@ -6,22 +16,36 @@ services:
       dockerfile: ./db/Dockerfile
     environment:
       MARIADB_ROOT_PASSWORD: okaberoot
+      MARIADB_ROOT_HOST: '%'
       MARIADB_DATABASE: RANKING
       MARIADB_USER: okabe
       MARIADB_PASSWORD: okabe
       TZ: 'Asia/Tokyo'
+    privileged: true
+    networks:
+      - okb_network
     volumes:
       - ./db/data:/var/lib/mysql
     command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     ports:
-      - 3306:3306
+      - '3306:3306'
   app:
     container_name: golang
     build:
       context: .
       dockerfile: ./go/Dockerfile
     ports:
-      - 8080:8080
+      - '8080:8080'
     tty: true
     stdin_open: true
-    
+    privileged: true
+    networks:
+      - okb_network
+volumes:
+  gcloud_config_data:
+networks:
+  okb_network:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.40.0.0/16
