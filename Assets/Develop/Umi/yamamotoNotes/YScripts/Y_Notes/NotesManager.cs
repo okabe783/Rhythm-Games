@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 /// <summary> ファイルから読み込んだ曲についてのデータ </summary>
@@ -39,6 +38,8 @@ public class NotesManager : MonoBehaviour
 {
     [SerializeField, Header("ノーツのスピード")]
     private float _noteSpeed;
+    
+    public float NoteSpeed  => _noteSpeed; 
     
     [SerializeField, Header("ノーツの種類")]
     private List<GameObject> _notesObj = new List<GameObject>();
