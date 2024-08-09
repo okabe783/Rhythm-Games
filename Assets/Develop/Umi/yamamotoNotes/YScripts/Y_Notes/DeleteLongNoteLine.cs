@@ -1,36 +1,29 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary> longnoteのlineを消す </summary>
 public class DeleteLongNoteLine : MonoBehaviour
 {
-    [SerializeField, Header("JudgeZone")] private GameObject _judgeZone;
+    private GameObject _judgeZone = default;
 
-    private bool _isPressed = false;
-    
-    private Mesh _mesh;
+    private Mesh _mesh = default;
+
+    private PlayerInput _playerInput = default;
     
     /// <summary> 元のmeshの頂点 </summary>
     private Vector3[] _vertices;
 
     private void Start()
     {
+        _judgeZone = GameObject.Find("JudgeZone");
+        _playerInput = FindObjectOfType<PlayerInput>();
         _mesh = GetComponent<MeshFilter>().mesh;
         _vertices = _mesh.vertices;
     }
 
-    void Update()
+    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            _isPressed = true;
-        }
-
-        if (Input.GetKeyUp(KeyCode.J))
-        {
-            _isPressed = false;
-        }
-        
-        if (_isPressed)
+        if (_playerInput.IsLongPress)
         {
             Vector3[] vertices = new Vector3[_vertices.Length];
             for (var i = 0; i < vertices.Length; i++) // meshの頂点の位置を調整していく
