@@ -444,10 +444,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90f9cd72273b3d442a91856f4ad99bdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _streamingAssetsAcf: RunAndRhythmGameProject
-  _cueSheetBGM: CueSheet_BGM
-  _awbPathBGM: CueSheet_BGM
-  _cueSheetSE: CueSheet_SE
+  _streamingAssetsAcf: RRGameProject
+  _cueSheetBGM: CueSheet_RR_Music
+  _awbPathBGM: CueSheet_RR_Music
+  _cueSheetSE: CueSheet_RR_SE
 --- !u!4 &1719256955
 Transform:
   m_ObjectHideFlags: 0

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 /// <summary> ノーツの判定を行うクラス </summary>
 public class NotesJudge : MonoBehaviour
@@ -114,6 +113,8 @@ public class NotesJudge : MonoBehaviour
         if (duration == -1) { return; }
         _longNoteFinishTime = time + duration;
         _lane = getLane;
+        //Loopサウンドを再生
+        CriSoundManager.Instance.PlaySE("SE_Long");
         Judgement(Mathf.Abs(Time.time - (time + _startTime)), getLane);
     }
     
@@ -149,6 +150,8 @@ public class NotesJudge : MonoBehaviour
             _notesManager.DeleteNoteData(lane);
             Debug.Log("perfect");
             _score.AddScore(Rating.Perfect);
+            //Soundを再生
+            CriSoundManager.Instance.PlaySE("SE_Perfect",5f);
         }
         else if (timeLag <= _greatTime)
         {
@@ -156,6 +159,8 @@ public class NotesJudge : MonoBehaviour
             _notesManager.DeleteNoteData(lane);
             Debug.Log("Great");
             _score.AddScore(Rating.Great);
+            //Soundを再生
+            CriSoundManager.Instance.PlaySE("SE_Great",5f);
         }
     }
 }
