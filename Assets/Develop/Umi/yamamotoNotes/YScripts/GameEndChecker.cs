@@ -15,42 +15,64 @@ public class GameEndChecker : MonoBehaviour
     private bool _upLongNotefinish; // 上のロングノーツはもうないか
     private bool _downLongNotefinish; // 下のロングノーツはもうないか
 
-    void Start()
+    private bool _ingameFinish; // ingameが終わったか（ノーツが一つも残っていない）
+
+    private void Start()
     {
         _upTapNotefinish = false;
         _downTapNotefinish = false;
         _upLongNotefinish = false;
         _downLongNotefinish = false;
+        _ingameFinish = false;
     }
     
-    void Update()
+    private void Update()
     {
-        if (!_upTapNotefinish)
+        if (!_ingameFinish)
         {
-            if (_notesManager.GetTapNotesData(0) == -1) { _upTapNotefinish = true; }
-        }
-        if (!_downTapNotefinish)
-        {
-            if (_notesManager.GetTapNotesData(1) == -1) { _downTapNotefinish = true; }
-        }
-        if (!_upLongNotefinish)
-        {
-            if (_notesManager.GetLongNotesData(0).Item1 == -1) { _upLongNotefinish = true; }
-        }
-        if (!_downLongNotefinish)
-        {
-            if (_notesManager.GetLongNotesData(1).Item1 == -1) { _downLongNotefinish = true; }
-        }
+            if (!_upTapNotefinish)
+            {
+                if (_notesManager.GetTapNotesData(0) == -1)
+                {
+                    _upTapNotefinish = true;
+                }
+            }
 
-        if (_upTapNotefinish && _downTapNotefinish && _upLongNotefinish && _downLongNotefinish)
-        {
-            Invoke("SceneChange", _untilChange);
+            if (!_downTapNotefinish)
+            {
+                if (_notesManager.GetTapNotesData(1) == -1)
+                {
+                    _downTapNotefinish = true;
+                }
+            }
+
+            if (!_upLongNotefinish)
+            {
+                if (_notesManager.GetLongNotesData(0).Item1 == -1)
+                {
+                    _upLongNotefinish = true;
+                }
+            }
+
+            if (!_downLongNotefinish)
+            {
+                if (_notesManager.GetLongNotesData(1).Item1 == -1)
+                {
+                    _downLongNotefinish = true;
+                }
+            }
+
+            if (_upTapNotefinish && _downTapNotefinish && _upLongNotefinish && _downLongNotefinish)
+            {
+                _ingameFinish = true;
+                Invoke("SceneChange", _untilChange);
+            }
         }
     }
 
     private void SceneChange()
     {
-        SceneLoad.Instance.OnChangeScene("Result","InGame");
+        SceneLoad.Instance.OnChangeScene("Result","Stage1_Beta");
     }
 }
 
