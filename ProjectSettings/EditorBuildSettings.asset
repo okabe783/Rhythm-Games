@@ -21,8 +21,8 @@ EditorBuildSettings:
     path: Assets/Master/Scenes/InGame.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Master/Scenes/InGame/Stage1.unity
-    guid: f38da1d07683e8945b13ec5607535746
+    path: Assets/Master/Scenes/InGame/Stage1_Beta.unity
+    guid: a2b912296bd464a4883860e91e7b3ccb
   - enabled: 1
     path: Assets/Master/Scenes/InGame/Stage2.unity
     guid: 6c4fbe9befd84dd41ba4c0052f304c20

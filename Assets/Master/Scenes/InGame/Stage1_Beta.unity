@@ -541,6 +541,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _selectData: {fileID: 11400000, guid: cd2535bb64d07ee4c8cfeb6f32ff7044, type: 2}
   _characterDataBaseList: {fileID: 11400000, guid: cec8f87ba6dfcc842b8979da011db8d0, type: 2}
+  _seName: 
 --- !u!114 &1320851733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -643,10 +644,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1371091660}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a1ffd11f4ef89e4dbf5a3ef0db1fd56, type: 3}
+  m_Script: {fileID: 11500000, guid: f5225e5d68511694c945fdcf83a95203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 1320851730}
+  _damageValue: 1
   _notesManager: {fileID: 1005447586}
+  _score: {fileID: 0}
   _perfectTime: 0.03
   _greatTime: 0.05
 --- !u!4 &1371091662
