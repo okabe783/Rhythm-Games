@@ -113,8 +113,6 @@ public class NotesJudge : MonoBehaviour
         if (duration == -1) { return; }
         _longNoteFinishTime = time + duration;
         _lane = getLane;
-        //Loopサウンドを再生
-        CriSoundManager.Instance.PlaySE("SE_Long");
         Judgement(Mathf.Abs(Time.time - (time + _startTime)), getLane);
     }
     
