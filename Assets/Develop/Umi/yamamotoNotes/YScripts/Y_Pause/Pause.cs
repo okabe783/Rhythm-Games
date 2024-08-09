@@ -7,6 +7,7 @@ public class Pause : MonoBehaviour
 {
     protected void DrawPauseMenu(Canvas can)
     {
+        CriSoundManager.Instance.PlaySE("SE_Pause", 0.5f);
         can.gameObject.SetActive(true);
     }
 
