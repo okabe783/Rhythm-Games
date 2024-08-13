@@ -8,4 +8,9 @@ public class ImageAnimation : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
     }
+
+    private void RudderSound()
+    {
+        CriSoundManager.Instance.PlaySE("SE_Kishimuoto");
+    }
 }

@@ -114,6 +114,8 @@ public class NotesJudge : MonoBehaviour
         _longNoteFinishTime = time + duration;
         _lane = getLane;
         Judgement(Mathf.Abs(Time.time - (time + _startTime)), getLane);
+        CriSoundManager.Instance.PlaySE("SE_Long");
+        Debug.Log("ロングノーツ中です");
     }
     
     /// <summary> ロングノーツの終わりの判定 </summary>
