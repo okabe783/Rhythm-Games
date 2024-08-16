@@ -47,7 +47,7 @@ public class NotesJudge : MonoBehaviour
             if (Time.time - (upTapNoteTime + _startTime) > _greatTime)
             {
                 //ToDo:Missの処理
-                _notesManager.DeleteNoteData(0);
+                _notesManager.DeleteNoteData(0, true);
                 Debug.Log("miss");
                 _damage.Damage(_damageValue);
                 _score.AddScore(Rating.Miss);
@@ -59,7 +59,7 @@ public class NotesJudge : MonoBehaviour
             if (Time.time - (downTapNoteTime + _startTime) > _greatTime)
             {
                 //ToDo:Missの処理
-                _notesManager.DeleteNoteData(1);
+                _notesManager.DeleteNoteData(1, true);
                 Debug.Log("miss");
                 _damage.Damage(_damageValue);
                 _score.AddScore(Rating.Miss);
@@ -71,7 +71,7 @@ public class NotesJudge : MonoBehaviour
             if (Time.time - (upLongNoteTime + _startTime) > _greatTime)
             {
                 //ToDo:Missの処理
-                _notesManager.DeleteNoteData(0);
+                _notesManager.DeleteNoteData(0, true);
                 _longNoteFinishTime = -2;
                 Debug.Log("miss");
                 _damage.Damage(_damageValue);
@@ -84,7 +84,7 @@ public class NotesJudge : MonoBehaviour
             if (Time.time - (downLongNoteTime + _startTime) > _greatTime)
             {
                 //ToDo:Missの処理
-                _notesManager.DeleteNoteData(1);
+                _notesManager.DeleteNoteData(1, true);
                 _longNoteFinishTime = -2;
                 Debug.Log("miss");
                 _damage.Damage(_damageValue);
@@ -114,7 +114,7 @@ public class NotesJudge : MonoBehaviour
         _longNoteFinishTime = time + duration;
         _lane = getLane;
         Judgement(Mathf.Abs(Time.time - (time + _startTime)), getLane);
-        CriSoundManager.Instance.PlaySE("SE_Long");
+        //CriSoundManager.Instance.PlaySE("SE_Long_Press");
         Debug.Log("ロングノーツ中です");
     }
     
@@ -127,7 +127,7 @@ public class NotesJudge : MonoBehaviour
         {
             //ToDo:Missの処理
             _longNoteFinishTime = -2;
-            _notesManager.DeleteNoteData(_lane);
+            _notesManager.DeleteNoteData(_lane, true);
             Debug.Log("miss");
             _damage.Damage(_damageValue);
             _score.AddScore(Rating.Miss);
@@ -135,6 +135,8 @@ public class NotesJudge : MonoBehaviour
         else
         {
             Judgement(Mathf.Abs(Time.time - (_longNoteFinishTime + _startTime)), _lane);
+            //CriSoundManager.Instance.StopSE();
+            Debug.Log("SE stop");
             _longNoteFinishTime = -2;
         }
     }
@@ -147,7 +149,7 @@ public class NotesJudge : MonoBehaviour
         if (timeLag <= _perfectTime)
         {
             // Perfectの処理
-            _notesManager.DeleteNoteData(lane);
+            _notesManager.DeleteNoteData(lane, false);
             Debug.Log("perfect");
             _score.AddScore(Rating.Perfect);
             //Soundを再生
@@ -156,7 +158,7 @@ public class NotesJudge : MonoBehaviour
         else if (timeLag <= _greatTime)
         {
             // Greatの処理
-            _notesManager.DeleteNoteData(lane);
+            _notesManager.DeleteNoteData(lane, false);
             Debug.Log("Great");
             _score.AddScore(Rating.Great);
             //Soundを再生

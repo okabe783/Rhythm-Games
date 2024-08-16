@@ -156,16 +156,17 @@ public class NotesManager : MonoBehaviour
 
     /// <summary> noteのデータを削除する </summary>
     /// <param name="lane"> どっちのレーンか（0 = 上, 1 = 下）</param>
-    public void DeleteNoteData(int lane)
+    /// <param name="visible"> true = judgezoneで消す, false = 画面外に行ったら消す</param>
+    public void DeleteNoteData(int lane, bool visible)
     {
         if (lane == 0)
         {
-            _upNoteList[0].noteObj.SetActive(false);
+            _upNoteList[0].noteObj.SetActive(visible);
             _upNoteList.RemoveAt(0);
         }
         else if (lane == 1)
         {
-            _downNoteList[0].noteObj.SetActive(false);
+            _downNoteList[0].noteObj.SetActive(visible);
             _downNoteList.RemoveAt(0);
         }
     }
