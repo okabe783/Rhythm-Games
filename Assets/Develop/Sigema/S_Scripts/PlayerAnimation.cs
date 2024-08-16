@@ -2,6 +2,7 @@ using UnityEngine;
 
 /// <summary>
 /// 入力に応じてアニメーションを遷移させる
+/// SEも鳴らす
 /// </summary>
 public class PlayerAnimation : MonoBehaviour, IPlayerInput
 {
@@ -11,20 +12,29 @@ public class PlayerAnimation : MonoBehaviour, IPlayerInput
     private static readonly int Attack3 = Animator.StringToHash("Attack3");
     private static readonly int Hit = Animator.StringToHash("Hit");
     private static readonly int Death = Animator.StringToHash("Death");
+    private CriSoundManager _criSoundManager = default;
+
+    private void Start()
+    {
+        _criSoundManager = CriSoundManager.Instance;
+    }
 
     // todo:Attack1~2をどう決めるかは未定
     public void InputUpper()
     {
+        _criSoundManager.PlaySE("SE_Attack_Upper");
         _animator.Play(Attack1);
     }
 
     public void InputUpperAndLower()
     {
+        _criSoundManager.PlaySE("SE_Attack_Simultaneous");
         _animator.Play(Attack2);
     }
 
     public void InputLower()
     {
+        _criSoundManager.PlaySE("SE_Attack_Lower");
         _animator.Play(Attack2);
     }
 
