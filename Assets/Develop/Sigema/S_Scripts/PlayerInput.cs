@@ -130,7 +130,7 @@ public class PlayerInput : MonoBehaviour
     /// </summary>
     private void Cansel()
     {
-        if (_isLongPress) return;
+        if (!_isLongPress) return;
         if (Input.GetKeyUp(KeyCode.F))
         {
             foreach (var item in _iPlayerInput) item.InputLongPressEnd();
