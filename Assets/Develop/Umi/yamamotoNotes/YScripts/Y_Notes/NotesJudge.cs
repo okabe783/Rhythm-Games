@@ -3,6 +3,7 @@ using UnityEngine;
 /// <summary> ノーツの判定を行うクラス </summary>
 public class NotesJudge : MonoBehaviour
 {
+    #region
     [SerializeField] private GameObject _player = default;
     [SerializeField, Header("ダメージ量")] private int _damageValue = 1;
     private IDamage _damage = default;
@@ -28,15 +29,20 @@ public class NotesJudge : MonoBehaviour
 
     /// <summary> ロングノーツの流れてくるレーン </summary>
     private int _lane;
+
+    /// <summary> LongNoteのSEのindexを入れておく </summary>
+    private int _index = 0;
     
-    void Start()
+    #endregion
+    
+    private void Start()
     {
         _damage = _player.GetComponent<IDamage>();
         _startTime = Time.time;
         _longNoteFinishTime = -2;
     }
     
-    void Update()
+    private void Update()
     {
         float upTapNoteTime = _notesManager.GetTapNotesData(0);
         float downTapNoteTime = _notesManager.GetTapNotesData(1);
@@ -114,7 +120,7 @@ public class NotesJudge : MonoBehaviour
         _longNoteFinishTime = time + duration;
         _lane = getLane;
         Judgement(Mathf.Abs(Time.time - (time + _startTime)), getLane);
-        //CriSoundManager.Instance.PlaySE("SE_Long_Press");
+        _index = CriSoundManager.Instance.PlaySE("SE_Long_Press", 5f);
         Debug.Log("ロングノーツ中です");
     }
     
@@ -123,10 +129,10 @@ public class NotesJudge : MonoBehaviour
     {
         float time = _notesManager.GetLongNotesData(_lane).Item1;
         if (_longNoteFinishTime == -2) { return; }
+        CriSoundManager.Instance.StopSE(_index);
         if (Time.time < time + _startTime - _greatTime)
         {
             //ToDo:Missの処理
-            _longNoteFinishTime = -2;
             _notesManager.DeleteNoteData(_lane, true);
             Debug.Log("miss");
             _damage.Damage(_damageValue);
@@ -135,10 +141,8 @@ public class NotesJudge : MonoBehaviour
         else
         {
             Judgement(Mathf.Abs(Time.time - (_longNoteFinishTime + _startTime)), _lane);
-            //CriSoundManager.Instance.StopSE();
-            Debug.Log("SE stop");
-            _longNoteFinishTime = -2;
         }
+        _longNoteFinishTime = -2;
     }
 
     /// <summary> 評価 </summary>
