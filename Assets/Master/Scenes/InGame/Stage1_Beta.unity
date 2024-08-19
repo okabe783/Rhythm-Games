@@ -2647,6 +2647,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _longPressStartTime: 0.03
+  _notesJudge: {fileID: 0}
 --- !u!114 &1320851737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2735,8 +2736,9 @@ MonoBehaviour:
   _damageValue: 1
   _notesManager: {fileID: 1005447586}
   _score: {fileID: 677622108}
-  _perfectTime: 0.03
-  _greatTime: 0.05
+  _perfectTime: 0.08
+  _greatTime: 0.1
+  _index: 0
 --- !u!4 &1371091662
 Transform:
   m_ObjectHideFlags: 0

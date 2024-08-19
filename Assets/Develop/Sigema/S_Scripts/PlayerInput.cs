@@ -12,9 +12,10 @@ public class PlayerInput : MonoBehaviour
     private bool _canLongPress = default; // 長押しができるか
     private IPlayerInput[] _iPlayerInput = default;
     private NotesManager _notesManager = default;
-    private bool _isLongPress = default; 
+    private bool _isLongPress = default;
     private float _timeFKeyPressed = -1f;
     private float _timeJKeyPressed = -1f;
+    private float _startTime = default; // インゲームが開始された時間
 
     #endregion
 
@@ -23,30 +24,30 @@ public class PlayerInput : MonoBehaviour
 
     private void Start()
     {
+        _longPressStartTime = 0.1f;
         _iPlayerInput = transform.GetComponents<IPlayerInput>();
         _notesManager = FindObjectOfType<NotesManager>();
+        _startTime = Time.time;
     }
 
     private void Update()
     {
-        _isLongPress = _timer > 0; // 計測中 = 長押し中
+        _isLongPress = _timer > _longPressStartTime; // 計測中 = 長押し中
 
         // ロングノーツの終端を過ぎたとき
         var num = _startTimeLongNote + _lengthLongNote;
-        if (Time.time > num + 0.1f)
+        if (Time.time > num + _startTime + 0.1f)
         {
             // 次のロングノーツの始端が来るまで偽
             _canLongPress = false;
-            // 遅めの入力開始でも強制終了
-            foreach (var item in _iPlayerInput) item.InputLongPressEnd();
             _timer = 0;
         }
 
         if (!_canLongPress) GetLongNoteInfo(); // ロングノーツ押下中は再検索不要
 
         // ±0.1fの範囲で長押しが開始できるようになる
-        if (Time.time <= _startTimeLongNote + 0.1f
-            && Time.time >= _startTimeLongNote - 0.1f)
+        if (Time.time <= _startTimeLongNote + _startTime + 0.1f
+            && Time.time >= _startTimeLongNote + _startTime - 0.1f)
         {
             _canLongPress = true;
         }
@@ -56,7 +57,6 @@ public class PlayerInput : MonoBehaviour
         {
             foreach (var item in _iPlayerInput) item.InputLongPressEnd();
             _timer = 0;
-            // _canLongPressFJ = false;
             _canLongPress = false;
         }
         // 長押し開始時の処理呼び出し
@@ -130,7 +130,7 @@ public class PlayerInput : MonoBehaviour
     /// </summary>
     private void Cansel()
     {
-        if (_isLongPress) return;
+        if (!_isLongPress) return;
         if (Input.GetKeyUp(KeyCode.F))
         {
             foreach (var item in _iPlayerInput) item.InputLongPressEnd();
@@ -190,14 +190,8 @@ public class PlayerInput : MonoBehaviour
 
         _startTimeLongNote = start;
         _lengthLongNote = length;
-        // Debug.Log($"有効な方を使用 st: {_startTimeLongNote}  len: {_lengthLongNote}");
 
-        // // 同時に流れてきたとき
-        // // todo:上と下で長さが異なるケースを想定していない
-        // if (upper.Item1 == lower.Item1)
-        // {
-        //     _canLongPressFJ = true;
-        // }
+        // todo:上と下で長さが異なるケースを想定していない
 
         _longPressEndTime = _lengthLongNote + _longPressStartTime;
     }
