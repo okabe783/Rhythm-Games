@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46bc3d4776d3ae642bd348ccb39091be, type: 3}
   m_Name: Character 1
   m_EditorClassIdentifier: 
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: b9d3fc0167dfbd14184b5018aeabbd1b, type: 3}
   _characterId: 1
   _hp: 0
+  _skillName: "\u30B9\u30AD\u30EB\uFF12"
+  _skillInfo: "\u8AAC\u660E\uFF5E\uFF5E"
