@@ -5,21 +5,22 @@ using UnityEngine;
 /// </summary>
 public class SelectChara : MonoBehaviour
 {
-    [SerializeField] private SelectData _selectData; 
-    
+    [SerializeField] private SelectData _selectData;
+
     /// <summary>
     /// IDをボタンで設定する必要がある
     /// </summary>
     /// <param name="id"></param>
     public void OnClick(int id)
     {
-        // todo: 保存クラスに保存
-        _selectData._characterId = id;
+        // todo: 選択された（押された）ときのSE再生
+        // ~~~
+
+        _selectData._characterId = id; // 保存クラスに保存
         Debug.Log($"キャラID : {id} を保存します。");
-        // todo: 保存クラスからロードするシーン名を受け取る
-        var sceneName = _selectData.ItemData.SelectScene;
+        var sceneName = _selectData.ItemData.SelectScene; // 保存クラスからロードするシーン名を受け取る
         Debug.Log(sceneName);
 
-        SceneLoad.Instance.StartLongLoad(sceneName,"SelectChara");
+        SceneLoad.Instance.StartLongLoad(sceneName, "SelectChara");
     }
 }
