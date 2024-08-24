@@ -21,6 +21,6 @@ public class SelectChara : MonoBehaviour
         var sceneName = _selectData.ItemData.SelectScene; // 保存クラスからロードするシーン名を受け取る
         Debug.Log(sceneName);
 
-        SceneLoad.Instance.StartLongLoad(sceneName, "SelectChara");
+        SceneLoad.Instance.StartLongLoad(sceneName, "SelectCharacter");
     }
 }

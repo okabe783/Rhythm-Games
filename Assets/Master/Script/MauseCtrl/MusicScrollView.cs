@@ -79,7 +79,7 @@ internal class MusicScrollView : FancyScrollView<MusicItemData, Context>
 
             //次のシーンに切り換える
             if (SceneLoad.Instance != null)
-                SceneLoad.Instance.OnChangeScene("SelectChara", "SelectMusicScene");
+                SceneLoad.Instance.OnChangeScene("SelectCharacter", "SelectMusicScene");
             else
                 Debug.LogError("SceneLoadインスタンスを取得できていません");
         }
