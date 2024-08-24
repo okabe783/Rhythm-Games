@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary> longnoteのlineを消す </summary>
