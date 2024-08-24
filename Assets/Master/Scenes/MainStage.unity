@@ -2062,6 +2062,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1005447587}
   - component: {fileID: 1005447586}
+  - component: {fileID: 1005447588}
   m_Layer: 0
   m_Name: NotesManager
   m_TagString: Untagged
@@ -2082,9 +2083,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _noteSpeed: 10
-  _notesObj:
-  - {fileID: 3598992444544070995, guid: 1108b000e9f852b4d9e500bd63b0d140, type: 3}
-  - {fileID: 838931787211784162, guid: 17ccc3cb74622f049a9106f43e1a3add, type: 3}
   _noteStartLine: -2.5
   _songName: "\u8001\u8CE2\u4EBA\u306E\u821F"
 --- !u!4 &1005447587
@@ -2102,6 +2100,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1005447588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1005447585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e670bc58bf2ef49b2764bdb5d5fe08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _notesObj:
+  - {fileID: 3598992444544070995, guid: 1108b000e9f852b4d9e500bd63b0d140, type: 3}
+  - {fileID: 838931787211784162, guid: 17ccc3cb74622f049a9106f43e1a3add, type: 3}
 --- !u!1 &1058052604
 GameObject:
   m_ObjectHideFlags: 0
@@ -2647,7 +2660,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _longPressStartTime: 0.03
-  _notesJudge: {fileID: 0}
 --- !u!114 &1320851737
 MonoBehaviour:
   m_ObjectHideFlags: 0
