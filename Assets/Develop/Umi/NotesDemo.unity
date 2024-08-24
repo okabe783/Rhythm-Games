@@ -742,7 +742,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _longPressStartTime: 0.03
-  _notesJudge: {fileID: 995578057}
 --- !u!114 &287755519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2056,8 +2055,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1739380834}
   - component: {fileID: 1739380833}
+  - component: {fileID: 1739380835}
   m_Layer: 0
-  m_Name: NotesManager
+  m_Name: NotesSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2076,9 +2076,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _noteSpeed: 10
-  _notesObj:
-  - {fileID: 3598992444544070995, guid: 1108b000e9f852b4d9e500bd63b0d140, type: 3}
-  - {fileID: 838931787211784162, guid: 17ccc3cb74622f049a9106f43e1a3add, type: 3}
   _noteStartLine: -2.5
   _songName: "\u8001\u8CE2\u4EBA\u306E\u821F"
 --- !u!4 &1739380834
@@ -2096,6 +2093,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1739380835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739380832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e670bc58bf2ef49b2764bdb5d5fe08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _notesObj:
+  - {fileID: 3598992444544070995, guid: 1108b000e9f852b4d9e500bd63b0d140, type: 3}
+  - {fileID: 838931787211784162, guid: 17ccc3cb74622f049a9106f43e1a3add, type: 3}
 --- !u!1 &1786199587
 GameObject:
   m_ObjectHideFlags: 0
@@ -2200,6 +2212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b52dee605c12044783ccbeea9e086c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _notesManager: {fileID: 0}
 --- !u!4 &1792481143
 Transform:
   m_ObjectHideFlags: 0
