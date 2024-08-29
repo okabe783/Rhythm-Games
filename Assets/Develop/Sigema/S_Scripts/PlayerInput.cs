@@ -188,7 +188,7 @@ public class PlayerInput : MonoBehaviour
             }
         }
 
-        _startTimeLongNote = start;
+        _startTimeLongNote = start + _notesManager.Delay;
         _lengthLongNote = length;
 
         // todo:上と下で長さが異なるケースを想定していない

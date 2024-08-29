@@ -34,14 +34,16 @@ public class NoteData
 /// <summary> ノーツの管理を行うクラス </summary>
 public class NotesManager : MonoBehaviour
 {
-    [SerializeField, Header("ノーツのスピード")] private float _noteSpeed;
-
+    [SerializeField] private float _noteSpeed;
     public float NoteSpeed => _noteSpeed;
+    
+    [SerializeField] private string _songName;
+
+    [SerializeField] private float _delay;
+    public float Delay => _delay;
     
     [SerializeField, Header("ノーツの生成が始まる場所")]
     private float _noteStartLine = -4.6f;
-
-    [SerializeField, Header("曲名")] private string _songName;
 
     /// <summary> 総ノーツ数 </summary>
     private int _notesNum;
@@ -61,12 +63,12 @@ public class NotesManager : MonoBehaviour
         };
         _noteGenerator = gameObject.GetComponent<NoteGenerator>();
         _notesNum = 0;
-        Load(_songName);
+        Invoke("Load", _delay);
     }
 
-    private void Load(string songName)
+    private void Load()
     {
-        string inputString = Resources.Load<TextAsset>(songName).ToString();
+        string inputString = Resources.Load<TextAsset>(_songName).ToString();
         Data inputJson = JsonUtility.FromJson<Data>(inputString);
 
         _notesNum = inputJson.notes.Length;

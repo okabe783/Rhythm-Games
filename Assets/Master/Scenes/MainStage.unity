@@ -2064,7 +2064,7 @@ GameObject:
   - component: {fileID: 1005447586}
   - component: {fileID: 1005447588}
   m_Layer: 0
-  m_Name: NotesManager
+  m_Name: NotesSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2083,8 +2083,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _noteSpeed: 10
+  _songName: Retentir
+  _delay: 5
   _noteStartLine: -2.5
-  _songName: "\u8001\u8CE2\u4EBA\u306E\u821F"
 --- !u!4 &1005447587
 Transform:
   m_ObjectHideFlags: 0
@@ -2750,7 +2751,6 @@ MonoBehaviour:
   _score: {fileID: 677622108}
   _perfectTime: 0.08
   _greatTime: 0.1
-  _index: 0
 --- !u!4 &1371091662
 Transform:
   m_ObjectHideFlags: 0
