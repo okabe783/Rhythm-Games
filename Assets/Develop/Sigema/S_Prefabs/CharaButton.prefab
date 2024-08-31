@@ -92,7 +92,6 @@ GameObject:
   - component: {fileID: 1024218227338648997}
   - component: {fileID: 4269464445124417900}
   - component: {fileID: 7515264030542086472}
-  - component: {fileID: 5709168817327139896}
   - component: {fileID: 4853916152046431015}
   - component: {fileID: 8878848038265706188}
   - component: {fileID: 8517684668510276490}
@@ -186,19 +185,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _magnification: 1.5
---- !u!114 &5709168817327139896
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5014010698979850053}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d210620f24d7d164c9e270b4df8411dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _seName: SE_CharacterSelect_Guitar
 --- !u!114 &4853916152046431015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,7 +231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3297abc95a0343948b8a12be2449590e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameObject: {fileID: 0}
+  _charaId: 0
 --- !u!1 &5299360219138432680
 GameObject:
   m_ObjectHideFlags: 0
@@ -415,6 +401,7 @@ GameObject:
   - component: {fileID: 833316631875949545}
   - component: {fileID: 6295471954436126491}
   - component: {fileID: 989593031706423965}
+  - component: {fileID: 8674889035971809552}
   m_Layer: 5
   m_Name: CharaButton
   m_TagString: Untagged
@@ -509,3 +496,28 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8674889035971809552}
+        m_TargetAssemblyTypeName: SEPlayer, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8674889035971809552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6028085859665073837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd6e3c378787b2c4483da708528c4fb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _seName: SE_CharacterSelect_Guitar
