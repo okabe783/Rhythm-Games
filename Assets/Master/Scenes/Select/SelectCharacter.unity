@@ -179,8 +179,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selectData: {fileID: 11400000, guid: cd2535bb64d07ee4c8cfeb6f32ff7044, type: 2}
-  _seName: SE_SelectMusic
-  _wfs: 8
+  _seName: SE_CharacterSelect
+  _wfs: 5.5
   _images:
   - {fileID: 1272135749}
   - {fileID: 1003985581}
