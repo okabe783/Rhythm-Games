@@ -19,7 +19,7 @@ public class SEPlayer : MonoBehaviour
 
     private IEnumerator WaitForSe()
     {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(1f);
         CriSoundManager.Instance.PlaySE(_seName);
     }
 }
