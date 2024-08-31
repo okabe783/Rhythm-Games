@@ -1,14 +1,26 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 /// <summary> ノーツの生成 </summary>
 public class NoteGenerator : MonoBehaviour
 {
-    [SerializeField, Header("ノーツの種類")] private List<GameObject> _notesObj = new List<GameObject>();
-    
+    [SerializeField, Header("ノーツの種類")] private List<GameObject> _notesObj = new();
+    [SerializeField, Header("このSceneの名前")] private string _sceneName;
+
+    private Scene _scene = default;
+
+    private void Start()
+    {
+        _scene = SceneManager.GetSceneByName(_sceneName);
+    }
+
     public GameObject NoteGenerate(int noteType, Vector2 pos)
     {
-        return Instantiate(_notesObj[noteType], pos, Quaternion.identity);
+        var note = Instantiate(_notesObj[noteType], pos, Quaternion.identity);
+        SceneManager.MoveGameObjectToScene(note, _scene);
+        return note;
     }
     
     /// <summary> ロングノーツのラインの生成 </summary>
@@ -35,5 +47,6 @@ public class NoteGenerator : MonoBehaviour
         mesh.triangles = triangles;
         mesh.RecalculateNormals();
         lineObj.transform.position = finishUp;
+        SceneManager.MoveGameObjectToScene(lineObj, _scene);
     }
 }

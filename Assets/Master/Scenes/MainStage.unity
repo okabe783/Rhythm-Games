@@ -2116,6 +2116,7 @@ MonoBehaviour:
   _notesObj:
   - {fileID: 3598992444544070995, guid: 1108b000e9f852b4d9e500bd63b0d140, type: 3}
   - {fileID: 838931787211784162, guid: 17ccc3cb74622f049a9106f43e1a3add, type: 3}
+  _sceneName: MainStage
 --- !u!1 &1058052604
 GameObject:
   m_ObjectHideFlags: 0
@@ -2497,6 +2498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18d64aa084d89504ab3e9f6cfa1af629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _music: MUSIC_Retentir
 --- !u!4 &1246070809
 Transform:
   m_ObjectHideFlags: 0

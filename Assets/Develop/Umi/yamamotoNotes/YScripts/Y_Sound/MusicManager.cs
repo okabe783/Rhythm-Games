@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class MusicManager : MonoBehaviour
 {
+    [SerializeField] private string _music = default;
     private NotesManager _notesManager = default;
     
     private void Start()
@@ -13,6 +14,6 @@ public class MusicManager : MonoBehaviour
 
     private void PlayMusic()
     {
-        CriSoundManager.Instance.PlayBGM("MUSIC_Retentir", 3f);
+        CriSoundManager.Instance.PlayBGM(_music, 3f);
     }
 }
