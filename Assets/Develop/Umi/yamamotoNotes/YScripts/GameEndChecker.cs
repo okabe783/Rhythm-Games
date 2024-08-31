@@ -26,8 +26,8 @@ public class GameEndChecker : MonoBehaviour
     
     private void Update()
     {
-        if (_timer < _notesManager.Delay + 1) _timer += Time.deltaTime;
-        if (_timer > _notesManager.Delay)
+        if (_timer < _notesManager.Delay + 2) _timer += Time.deltaTime;
+        if (_timer > _notesManager.Delay + 1)
         {
             if (!_ingameFinish)
             {

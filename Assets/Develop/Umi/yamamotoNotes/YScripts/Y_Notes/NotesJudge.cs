@@ -27,14 +27,12 @@ public class NotesJudge : MonoBehaviour
     private int _lane;
 
     private int _index = 0;
-    private CriSoundManager _criSoundManager;
 
     private void Start()
     {
         _damage = _player.GetComponent<IDamage>();
         _startTime = Time.time + _notesManager.Delay;
         _longNoteFinishTime = -2;
-        _criSoundManager = CriSoundManager.Instance;
     }
 
     private void Update()
