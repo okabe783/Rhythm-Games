@@ -22,7 +22,7 @@ public class DeleteLongNoteLine : MonoBehaviour
 
     private void Update()
     {
-        if (_playerInput.IsLongPress)
+        if (_playerInput.IsLongPressF || _playerInput.IsLongPressJ)
         {
             Vector3[] vertices = new Vector3[_vertices.Length];
             for (var i = 0; i < vertices.Length; i++) // meshの頂点の位置を調整していく
