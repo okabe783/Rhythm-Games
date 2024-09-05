@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Master/Scenes/TitleScene.unity
     guid: 2c8c9cca24e55f3499698035318aa1ab
   - enabled: 1
-    path: Assets/Master/Scenes/Select/SelectMusicScene.unity
+    path: Assets/Master/Scenes/SelectMusicScene.unity
     guid: af16aee387a3d5b4d9f66a6dd5bb72ae
   - enabled: 1
     path: Assets/Master/Scenes/MainStage.unity
@@ -21,6 +21,6 @@ EditorBuildSettings:
     path: Assets/Master/Scenes/Result.unity
     guid: 7e775094864e4a7478af0f59f31fc5df
   - enabled: 1
-    path: Assets/Master/Scenes/Select/SelectCharacter.unity
+    path: Assets/Master/Scenes/SelectCharacter.unity
     guid: 8fd7f4176ddbac6499a6139ccdc70c7b
   m_configObjects: {}

@@ -39,13 +39,6 @@ public static class SceneNavigation
         EditorSceneManager.SaveOpenScenes();
         OpenScene(4);
     }
-    
-    [MenuItem("Scene/Result")]
-    public static void OpenScene5()
-    {
-        EditorSceneManager.SaveOpenScenes();
-        OpenScene(5);
-    }
 
     private static void OpenScene(int sceneIndex)
     {
