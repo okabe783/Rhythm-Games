@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c189b05d17f5e4b4a9925a06aea8cffb, type: 3}
   m_Name: Sound3
   m_EditorClassIdentifier: 
-  <TableId>k__BackingField: 0
-  <PreviewTime>k__BackingField: 3
-  <SoundName>k__BackingField: "\u66F23"
-  <SelectScene>k__BackingField: MainStage
+  TableId: 3
+  PreviewTime: 0
+  SoundName: "\u66F23"
+  SelectScene: MainStage
