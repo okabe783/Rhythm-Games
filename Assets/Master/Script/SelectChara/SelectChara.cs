@@ -35,6 +35,7 @@ public class SelectChara : MonoBehaviour
         yield return new WaitForSeconds(_wfs);
         var sceneName = _selectData.ItemData.SelectScene; // 保存クラスからロードするシーン名を受け取る
         Debug.Log($"{sceneName}へ遷移します。");
+        CriSoundManager.Instance.StopBGM();
         SceneLoad.Instance.StartLongLoad(sceneName, "SelectCharacter");
     }
 
