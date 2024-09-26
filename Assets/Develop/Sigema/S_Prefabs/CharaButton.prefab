@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 4853916152046431015}
   - component: {fileID: 8878848038265706188}
   - component: {fileID: 8517684668510276490}
+  - component: {fileID: 1435827331270840405}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -232,6 +233,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _charaId: 0
+--- !u!114 &1435827331270840405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5014010698979850053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d210620f24d7d164c9e270b4df8411dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _seName: SE_CharacterSelect_Guitar
 --- !u!1 &5299360219138432680
 GameObject:
   m_ObjectHideFlags: 0
