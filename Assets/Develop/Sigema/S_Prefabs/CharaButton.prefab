@@ -416,6 +416,7 @@ GameObject:
   - component: {fileID: 6295471954436126491}
   - component: {fileID: 989593031706423965}
   - component: {fileID: 8674889035971809552}
+  - component: {fileID: 5451470535872166765}
   m_Layer: 5
   m_Name: CharaButton
   m_TagString: Untagged
@@ -535,3 +536,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _seName: SE_CharacterSelect_Guitar
+--- !u!114 &5451470535872166765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6028085859665073837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88f2b64abfacf0f408be5dd67db56516, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _selectData: {fileID: 11400000, guid: cd2535bb64d07ee4c8cfeb6f32ff7044, type: 2}
+  _seName: SE_CharacterSelect
+  _wfs: 0.5
+  _images:
+  - {fileID: 1024218227338648997}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _id: 0
