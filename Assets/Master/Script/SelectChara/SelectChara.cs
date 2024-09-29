@@ -10,7 +10,15 @@ public class SelectChara : MonoBehaviour
     [SerializeField] private SelectData _selectData = default;
     [SerializeField] private string _seName = default;
     [SerializeField, Header("待機時間")] private float _wfs = 5f; // 決定SEとキャラSEを合わせての長さ
+    [SerializeField, Header("キャラID")] private int _id = default;
     [SerializeField] private Image[] _images = default; // レイキャストターゲットを変更
+    private Button _button = default;
+
+    private void Start()
+    {
+        _button = GetComponent<Button>();
+        _button.onClick.AddListener(() => OnClick(_id));
+    }
 
     /// <summary>
     /// IDをボタンで設定する必要がある
@@ -41,7 +49,7 @@ public class SelectChara : MonoBehaviour
 
     /// <summary>
     /// 選ばれたキャラ以外の、
-    /// ボタンとかざしたときの機能を無効化する
+    /// かざしたときの機能を無効化する
     /// </summary>
     private void SleepButton(int id)
     {
