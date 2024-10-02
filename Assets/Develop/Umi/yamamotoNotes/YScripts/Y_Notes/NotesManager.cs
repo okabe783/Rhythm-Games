@@ -83,7 +83,7 @@ public class NotesManager : MonoBehaviour
             // ノーツの生成
             float x = time * _noteSpeed + _noteStartLine; // ノーツのx座標
             float y = inputJson.notes[i].block * -3f + 1f; // ノーツのy座標
-            var note = _noteGenerator.NoteGenerate(inputJson.notes[i].type - 1, new Vector2(x, y));
+            var note = _noteGenerator.NoteGenerate(inputJson.notes[i].type, new Vector2(x, y));
             var startUp = new Vector3(x, y + note.transform.localScale.y / 2);
             var startDown = new Vector3(x, y - note.transform.localScale.y / 2);
 
@@ -100,7 +100,7 @@ public class NotesManager : MonoBehaviour
                 _notesLists[lane].Add(new NoteData()
                 {
                     noteType = _noteFinishType, noteTime = finishTime, 
-                    noteObj = _noteGenerator.NoteGenerate(inputJson.notes[i].type - 1, 
+                    noteObj = _noteGenerator.NoteGenerate(inputJson.notes[i].type, 
                         new Vector2(finishTime * _noteSpeed + _noteStartLine, y)) 
                 });
                 var finishUp = new Vector3(finishTime * _noteSpeed + _noteStartLine, 

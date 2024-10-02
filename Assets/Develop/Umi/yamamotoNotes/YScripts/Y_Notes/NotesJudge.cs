@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 /// <summary> ノーツの判定を行うクラス </summary>
 public class NotesJudge : MonoBehaviour
@@ -10,7 +11,7 @@ public class NotesJudge : MonoBehaviour
     [SerializeField, Header("NotesManagerを入れる")]
     private NotesManager _notesManager;
 
-    [SerializeField, Header("Score")] private Score _score;
+    [SerializeField, Header("Score")] private ScoreModel _scoreModel;
 
     [SerializeField, Header("Perfectの範囲")] private float _perfectTime = 0.03f;
 
@@ -80,7 +81,7 @@ public class NotesJudge : MonoBehaviour
         {
             _notesManager.DeleteNoteData(_lane, true);
             _damage.Damage(_damageValue);
-            _score.AddScore(Rating.Miss);
+            _scoreModel.AddScore(Rating.Miss);
         }
         else
         {
@@ -100,7 +101,7 @@ public class NotesJudge : MonoBehaviour
             // Perfectの処理
             _notesManager.DeleteNoteData(lane, false);
             Debug.Log("perfect");
-            _score.AddScore(Rating.Perfect);
+            _scoreModel.AddScore(Rating.Perfect);
             //Soundを再生
             CriSoundManager.Instance.PlaySE("SE_Perfect", 5f);
         }
@@ -109,7 +110,7 @@ public class NotesJudge : MonoBehaviour
             // Greatの処理
             _notesManager.DeleteNoteData(lane, false);
             Debug.Log("Great");
-            _score.AddScore(Rating.Great);
+            _scoreModel.AddScore(Rating.Great);
             //Soundを再生
             CriSoundManager.Instance.PlaySE("SE_Great", 5f);
         }
@@ -128,7 +129,7 @@ public class NotesJudge : MonoBehaviour
                 _notesManager.DeleteNoteData(lane, true);
                 if(isLongNote) _longNoteFinishTime = -2;
                 _damage.Damage(_damageValue);
-                _score.AddScore(Rating.Miss);
+                _scoreModel.AddScore(Rating.Miss);
             }
         }
     }

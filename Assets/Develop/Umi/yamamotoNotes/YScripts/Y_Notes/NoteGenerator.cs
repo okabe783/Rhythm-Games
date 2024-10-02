@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
@@ -16,9 +15,19 @@ public class NoteGenerator : MonoBehaviour
         _scene = SceneManager.GetSceneByName(_sceneName);
     }
 
+    /// <summary> ノーツの生成 </summary>
+    /// <param name="noteType"> タップ(1)かロング(2)か </param>
+    /// <param name="pos"> ノーツの位置 </param>
+    /// <returns> ノーツ </returns>
     public GameObject NoteGenerate(int noteType, Vector2 pos)
     {
-        var note = Instantiate(_notesObj[noteType], pos, Quaternion.identity);
+        var prefabNum = 0;
+        if (noteType == 1)
+        {
+            prefabNum = pos.y > 0 ? 0 : 1; // ノーツが上なら0,下なら1のprefabを生成
+        }
+        else prefabNum = 2;
+        var note = Instantiate(_notesObj[prefabNum], pos, Quaternion.identity);
         SceneManager.MoveGameObjectToScene(note, _scene);
         return note;
     }
