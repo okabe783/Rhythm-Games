@@ -5,7 +5,7 @@ using UnityEngine.UI;
 internal class Tab : FancyCell<SellItemData, Context>
 {
     [SerializeField] private Animator _animator;
-    [SerializeField] private Text _message;
+    private int _musicID;
     [SerializeField] private Button _button;
 
     private float _currentPosition;
@@ -15,14 +15,11 @@ internal class Tab : FancyCell<SellItemData, Context>
         public static readonly int Scroll = Animator.StringToHash("ScrollButton");
     }
 
-    public override void Initialize()
-    {
-        _button.onClick.AddListener(() => Context.OnCellClicked?.Invoke(Index));
-    }
+    public int MusicID => _musicID;
 
     public override void UpdateContent(SellItemData itemData)
     {
-        _message.text = itemData.Message;
+        _musicID = itemData.MusicID;
     }
 
     public override void UpdatePosition(float position)
@@ -36,8 +33,6 @@ internal class Tab : FancyCell<SellItemData, Context>
 
         _animator.speed = 0;
     }
-
-    // GameObject が非アクティブになると Animator がリセットされてしまうため
-    // 現在位置を保持しておいて OnEnable のタイミングで現在位置を再設定します
+    
     private void OnEnable() => UpdatePosition(_currentPosition);
 }

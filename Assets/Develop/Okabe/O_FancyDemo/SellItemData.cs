@@ -1,9 +1,9 @@
-class SellItemData
+internal class SellItemData
 {
-    public string Message { get; }
+    public int MusicID { get; }
 
-    public SellItemData(string message)
+    public SellItemData(int musicID)
     {
-        Message = message;
+        MusicID = musicID;
     }
 }

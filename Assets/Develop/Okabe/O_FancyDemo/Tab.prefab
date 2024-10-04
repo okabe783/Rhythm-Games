@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 3084261036838227900}
   - component: {fileID: 3479027402810659574}
   - component: {fileID: 4401643596861472886}
+  - component: {fileID: -6125928840882454200}
+  - component: {fileID: 697489409942588470}
   m_Layer: 5
   m_Name: Tab
   m_TagString: Untagged
@@ -72,8 +74,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 3479027402810659574}
-  _message: {fileID: 5641367080511632402}
   _button: {fileID: 2734016108985791716}
+--- !u!225 &-6125928840882454200
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2571148113066236433}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &697489409942588470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2571148113066236433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebe065fd82214ec2b3120975c906d5cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _musicSellPrefab: {fileID: 2571148113066236433}
+  _musicCellButton: {fileID: 2734016108985791716}
 --- !u!1 &5035778400097202478
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,7 +138,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 120, y: 70}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5794543558479656968
 CanvasRenderer:
