@@ -14,6 +14,16 @@ public class MusicManager : MonoBehaviour
 
     private void PlayMusic()
     {
-        CriSoundManager.Instance.PlayBGM(_music, 3f);
+        CriSoundManager.Instance.PlayBGM(_music, 0.5f);
+    }
+
+    public void Stop()
+    {
+        CriSoundManager.Instance.PauseBGM();
+    }
+
+    public void Resume()
+    {
+        CriSoundManager.Instance.ResumeBGM();
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 public class InGamePause : Pause
 {
     [SerializeField] private Canvas _canvas = null;
+    [SerializeField] private MusicManager _musicManager;
     public bool _isPause { get; private set; }
     
     private void Update()
@@ -22,6 +23,7 @@ public class InGamePause : Pause
     private void Pause()
     {
         _isPause = true;
+        _musicManager.Stop();
         DrawPauseMenu(_canvas);
         Time.timeScale = 0f;
         Debug.Log("Pause");
@@ -32,6 +34,7 @@ public class InGamePause : Pause
         _isPause = false;
         DeletePauseMenu(_canvas);
         Time.timeScale = 1f;
+        _musicManager.Resume();
         Debug.Log("Resume");
     }
 }
