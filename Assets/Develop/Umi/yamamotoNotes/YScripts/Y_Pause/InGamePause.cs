@@ -26,7 +26,6 @@ public class InGamePause : Pause
         _musicManager.Stop();
         DrawPauseMenu(_canvas);
         Time.timeScale = 0f;
-        Debug.Log("Pause");
     }
 
     private void Resume()
@@ -35,6 +34,5 @@ public class InGamePause : Pause
         DeletePauseMenu(_canvas);
         Time.timeScale = 1f;
         _musicManager.Resume();
-        Debug.Log("Resume");
     }
 }
