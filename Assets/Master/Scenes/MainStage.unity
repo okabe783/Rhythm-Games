@@ -1038,7 +1038,7 @@ GameObject:
   m_Component:
   - component: {fileID: 246930626}
   m_Layer: 5
-  m_Name: Gage
+  m_Name: Gauge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1531,7 +1531,7 @@ GameObject:
   - component: {fileID: 431694820}
   - component: {fileID: 431694822}
   m_Layer: 5
-  m_Name: GageBackGround
+  m_Name: GaugeBackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2905,7 +2905,7 @@ GameObject:
   - component: {fileID: 1164451045}
   - component: {fileID: 1164451044}
   m_Layer: 5
-  m_Name: GageCanvas
+  m_Name: GaugeCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
