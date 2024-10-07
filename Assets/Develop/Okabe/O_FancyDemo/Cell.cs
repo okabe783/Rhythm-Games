@@ -5,7 +5,7 @@ using UnityEngine.UI;
 internal class Tab : FancyCell<SellItemData, Context>
 {
     [SerializeField] private Animator _animator;
-    private int _musicID;
+    private SoundTable _musicID;
     [SerializeField] private Button _button;
 
     private float _currentPosition;
@@ -15,11 +15,11 @@ internal class Tab : FancyCell<SellItemData, Context>
         public static readonly int Scroll = Animator.StringToHash("ScrollButton");
     }
 
-    public int MusicID => _musicID;
+    public SoundTable MusicID => _musicID;
 
     public override void UpdateContent(SellItemData itemData)
     {
-        _musicID = itemData.MusicID;
+        _musicID = itemData.SoundTable;
     }
 
     public override void UpdatePosition(float position)

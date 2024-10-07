@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 4401643596861472886}
   - component: {fileID: -6125928840882454200}
   - component: {fileID: 697489409942588470}
+  - component: {fileID: -6283243489387818992}
   m_Layer: 5
-  m_Name: Tab
+  m_Name: Cell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,8 +100,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe065fd82214ec2b3120975c906d5cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _musicSellPrefab: {fileID: 2571148113066236433}
-  _musicCellButton: {fileID: 2734016108985791716}
+  _cell: {fileID: 4401643596861472886}
+  _moveCellToPoints: {fileID: -6283243489387818992}
+  _backButtonPrefab: {fileID: 1296372632480255494, guid: 489cee90365b68844b8f5eb1d471be28, type: 3}
+  _confirmButtonPrefab: {fileID: 7594626563812037989, guid: 8b3e1651ff91ed345823dacd1f3a4bb8, type: 3}
+  _musicCellButtonPrefab: {fileID: 2734016108985791716}
+  _selectData: {fileID: 11400000, guid: cd2535bb64d07ee4c8cfeb6f32ff7044, type: 2}
+--- !u!114 &-6283243489387818992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2571148113066236433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c16fb9f0ed326ab47974f90079b34ba9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5035778400097202478
 GameObject:
   m_ObjectHideFlags: 0

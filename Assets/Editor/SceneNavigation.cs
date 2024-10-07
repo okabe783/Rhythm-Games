@@ -25,19 +25,26 @@ public static class SceneNavigation
         EditorSceneManager.SaveOpenScenes();
         OpenScene(2);
     }
-
-    [MenuItem("Scene/MainScene")]
+    
+    [MenuItem("Scene/SelectCharacter")]
     public static void OpenScene3()
     {
         EditorSceneManager.SaveOpenScenes();
         OpenScene(3);
     }
 
-    [MenuItem("Scene/Result")]
+    [MenuItem("Scene/MainScene")]
     public static void OpenScene4()
     {
         EditorSceneManager.SaveOpenScenes();
         OpenScene(4);
+    }
+
+    [MenuItem("Scene/Result")]
+    public static void OpenScene5()
+    {
+        EditorSceneManager.SaveOpenScenes();
+        OpenScene(5);
     }
 
     private static void OpenScene(int sceneIndex)
