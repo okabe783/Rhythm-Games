@@ -3,20 +3,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>Sceneを遷移させる</summary>
-public class SceneLoad : MonoBehaviour
+public class SceneLoad : SingletonMonoBehaviour<SceneLoad>
 {
-    //シングルトン化
-    public static SceneLoad Instance;
-
     [SerializeField, Header("ロード中に表示するUI")]
     private GameObject _loadingUI;
 
     private AsyncOperation _async;　// ロードの進捗状況を管理するための変数
-
-    private void Awake()
-    {
-        Instance = this;
-    }
 
     private void Start()
     {
@@ -36,9 +28,10 @@ public class SceneLoad : MonoBehaviour
     }
 
     /// <summary>UIを表示しないシーンのロード</summary>
-    public void StartShortLoad(string sceneName)
+    public void StartShortLoad(string sceneName,string unloadScene)
     {
         NormalLoading(sceneName);
+        SceneManager.UnloadSceneAsync(unloadScene);
     }
 
 //InGameシーンをロードするときはこっちを使う
@@ -60,6 +53,6 @@ public class SceneLoad : MonoBehaviour
 //InGameに突入する以外のシーンの遷移はこっちで行う
     private void NormalLoading(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadSceneAsync(sceneName,LoadSceneMode.Additive);
     }
 }
