@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Character 1
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: b9d3fc0167dfbd14184b5018aeabbd1b, type: 3}
+  _faceIcon: {fileID: 21300000, guid: b9d3fc0167dfbd14184b5018aeabbd1b, type: 3}
   _characterId: 1
   _hp: 0
   _skillName: "\u30B9\u30AD\u30EB\uFF12"
