@@ -8,8 +8,15 @@ public class HPPresenter : MonoBehaviour
 
     private void Start()
     {
+        _model.OnInitialHpSet += SetSliderInitialValue;
+    }
+    
+    /// <summary>
+    /// HPの初期化が終わったら実行される
+    /// </summary>
+    private void SetSliderInitialValue()
+    {
         _view.SetMaxHp(_model.CurrentHp.Value);
-        // モデルの現在のHP値が変化したときに、ビューを更新する
         _model.CurrentHp
             .Subscribe(hp => _view.SetSliderValue(hp))
             .AddTo(this);
