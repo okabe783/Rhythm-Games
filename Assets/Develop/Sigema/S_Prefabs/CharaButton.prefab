@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 8878848038265706188}
   - component: {fileID: 8517684668510276490}
   - component: {fileID: 1435827331270840405}
+  - component: {fileID: 5865505274997381774}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -246,6 +247,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _seName: SE_CharacterSelect_Guitar
+--- !u!114 &5865505274997381774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5014010698979850053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31caa047db6a12d4d8b35a7e5d63b470, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _outline: {fileID: 2100000, guid: b10928f3111192e4f960ce102d1d73dd, type: 2}
+  _target: {fileID: 1024218227338648997}
 --- !u!1 &5299360219138432680
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,6 +432,7 @@ GameObject:
   - component: {fileID: 989593031706423965}
   - component: {fileID: 8674889035971809552}
   - component: {fileID: 5451470535872166765}
+  - component: {fileID: 3052693478561640405}
   m_Layer: 5
   m_Name: CharaButton
   m_TagString: Untagged
@@ -551,9 +567,24 @@ MonoBehaviour:
   _selectData: {fileID: 11400000, guid: cd2535bb64d07ee4c8cfeb6f32ff7044, type: 2}
   _seName: SE_CharacterSelect
   _wfs: 0.5
+  _id: 0
   _images:
   - {fileID: 1024218227338648997}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  _id: 0
+--- !u!114 &3052693478561640405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6028085859665073837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f75022b87b929f46a61610e02850d4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _datalist: {fileID: 11400000, guid: cec8f87ba6dfcc842b8979da011db8d0, type: 2}
+  _image: {fileID: 0}
+  _charaID: 0
