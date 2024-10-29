@@ -10,7 +10,7 @@ public class Notes : MonoBehaviour
     private void Start()
     {
         _notesManager = FindObjectOfType<NotesManager>();
-        if (_bossName != "")
+        if (!string.IsNullOrEmpty(_bossName))
         {
             _boss = GameObject.Find(_bossName);
             _spriteRenderer = GetComponent<SpriteRenderer>();
