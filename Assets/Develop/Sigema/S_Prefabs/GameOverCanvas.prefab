@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sceneName: SelectMusicScene
-  _unloadSceneName: S_TestGameOver
+  _unloadSceneName: GameOver
   _button: {fileID: 8603773404793645980}
 --- !u!1 &1333586435081220069
 GameObject:
