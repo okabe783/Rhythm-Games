@@ -15,6 +15,6 @@ MonoBehaviour:
   _icon: {fileID: 21300000, guid: 1e6dd0b5b48fb0d4cba66d816634eeeb, type: 3}
   _faceIcon: {fileID: 21300000, guid: 1e6dd0b5b48fb0d4cba66d816634eeeb, type: 3}
   _characterId: 0
-  _hp: 100
+  _hp: 15
   _skillName: "\u30B9\u30AD\u30EB\u540D\u300C\u307B\u3052\uFF10\u300D"
   _skillInfo: "\u30B9\u30AD\u30EB\u306E\u8AAC\u660E\n\u300C\u307B\u3052\u307B\u3052\uFF10\u300D"
