@@ -3915,7 +3915,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47c1ea43555dd534eab47a763d27f3d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _nameOfGameOverScene: S_TestGameOver
+  _nameOfGameOverScene: GameOver
   _waitTime: 3
   _animator: {fileID: 3502720020208856463}
   _stateName: Slide
