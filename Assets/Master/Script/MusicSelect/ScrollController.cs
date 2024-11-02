@@ -8,7 +8,6 @@ public class ScrollController : MonoBehaviour
     [SerializeField] private Button _prevCellButton;
     [SerializeField] private Button _nextCellButton;
     [SerializeField] private SoundTableList _soundTableList;
-    
    
     private void Start()
     {
