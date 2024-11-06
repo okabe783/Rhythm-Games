@@ -33,7 +33,7 @@ public class PlayerDeath : MonoBehaviour
     {
         _playerInput = GetComponent<PlayerInput>();
         _updatePlayer = GetComponent<UpdatePlayer>();
-        _playerAnimation = GetComponent<PlayerAnimation>();
+        _playerAnimation = FindObjectOfType<PlayerAnimation>();
         _wfs = new WaitForSeconds(_waitTime);
     }
 
@@ -46,14 +46,17 @@ public class PlayerDeath : MonoBehaviour
 
     private IEnumerator LatePlay()
     {
-        if(_canPlayDeath) _playerAnimation.PlayDeath();
+        if (_canPlayDeath) _playerAnimation.PlayDeath();
         _playerInput.enabled = false;
         _canPlayDeath = false;
         Debug.Log("プレイヤーが死亡  キー入力制限");
 
         yield return _wfs;
 
-        if (_animator && _stateName != "") {_animator.Play(_stateName);}
+        if (_animator && _stateName != "")
+        {
+            _animator.Play(_stateName);
+        }
 
         yield return new WaitForSeconds(1f);
 

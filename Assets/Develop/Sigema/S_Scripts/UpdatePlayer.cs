@@ -10,11 +10,12 @@ public class UpdatePlayer : MonoBehaviour, IDamage
 
     [SerializeField, Header("キャラのリスト")] private CharacterDataBaseList _characterDataBaseList = default;
     [SerializeField, Header("再生するSE")] private string _seName = default;
+    [SerializeField, Header("キャラの親")] private Transform _parent = default;
+    [SerializeField, Header("親との相対位置")] private Vector3 _pos = default;
     private IntReactiveProperty _currentHp = new(1);
-    
     public IReadOnlyReactiveProperty<int> CurrentHp => _currentHp;
     public event Action OnInitialHpSet = default; // 初期化後に発火
-    
+
     #region 読み込むデータ変数
 
     private Sprite _sprite = default;
@@ -43,6 +44,12 @@ public class UpdatePlayer : MonoBehaviour, IDamage
             //Dataの取得
             _sprite = selectedCharacterData.Icon;
             _maxHp = selectedCharacterData.Hp;
+            if (selectedCharacterData.Character)
+            {
+                var go = Instantiate(selectedCharacterData.Character, _parent);
+                go.transform.position += _pos; // 位置調整
+            }
+
             //SpriteやHpの更新処理を追加
             UpdateVisuals();
             OnInitialHpSet?.Invoke();
