@@ -7,6 +7,7 @@ internal class ScrollView : FancyScrollView<SellItemData, Context>
 {
     [SerializeField] private Scroller _scroller;
     [SerializeField] private GameObject _cellPrefab;
+    [SerializeField] private Animator _rudderAnimator;
     protected override GameObject CellPrefab => _cellPrefab;
 
     protected override void Initialize()
