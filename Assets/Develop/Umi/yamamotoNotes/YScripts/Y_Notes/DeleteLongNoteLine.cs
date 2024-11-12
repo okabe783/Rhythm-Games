@@ -3,11 +3,9 @@ using UnityEngine;
 /// <summary> longnoteのlineを消す </summary>
 public class DeleteLongNoteLine : MonoBehaviour
 {
-    private GameObject _judgeZone = default;
-
-    private Mesh _mesh = default;
-
-    private PlayerInput _playerInput = default;
+    private GameObject _judgeZone;
+    private Mesh _mesh;
+    private PlayerInput _playerInput;
     
     /// <summary> 元のmeshの頂点 </summary>
     private Vector3[] _vertices;

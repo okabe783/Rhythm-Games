@@ -1,14 +1,20 @@
+using System;
 using UnityEngine;
 using UniRx;
 using UnityEngine.UI;
 
 public class UpdatePlayer : MonoBehaviour, IDamage
 {
-    [SerializeField, Header("データを保存しておく箱")] private SelectData _selectData = default;
+    [SerializeField, Header("データを保存しておく箱")]
+    private SelectData _selectData = default;
+
     [SerializeField, Header("キャラのリスト")] private CharacterDataBaseList _characterDataBaseList = default;
     [SerializeField, Header("再生するSE")] private string _seName = default;
-    private IntReactiveProperty _currentHp = default;
+    [SerializeField, Header("キャラの親")] private Transform _parent = default;
+    [SerializeField, Header("親との相対位置")] private Vector3 _pos = default;
+    private IntReactiveProperty _currentHp = new(1);
     public IReadOnlyReactiveProperty<int> CurrentHp => _currentHp;
+    public event Action OnInitialHpSet = default; // 初期化後に発火
 
     #region 読み込むデータ変数
 
@@ -38,9 +44,15 @@ public class UpdatePlayer : MonoBehaviour, IDamage
             //Dataの取得
             _sprite = selectedCharacterData.Icon;
             _maxHp = selectedCharacterData.Hp;
+            if (selectedCharacterData.Character)
+            {
+                var go = Instantiate(selectedCharacterData.Character, _parent);
+                go.transform.position += _pos; // 位置調整
+            }
 
             //SpriteやHpの更新処理を追加
             UpdateVisuals();
+            OnInitialHpSet?.Invoke();
         }
     }
 
@@ -48,7 +60,7 @@ public class UpdatePlayer : MonoBehaviour, IDamage
     {
         //ここに読み込んできたデータを使用したViewをつくる
         //別のView用のクラスに書いてもOK
-        _currentHp = new IntReactiveProperty(_maxHp);
+        _currentHp.Value = _maxHp;
         GetComponent<Image>().sprite = _sprite;
     }
 

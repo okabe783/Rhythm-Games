@@ -23,41 +23,41 @@ public class PlayerAnimation : MonoBehaviour, IPlayerInput
     public void InputUpper()
     {
         _criSoundManager.PlaySE("SE_Attack_Upper");
-        _animator.Play(Attack1);
+        if (_animator) _animator.Play(Attack1);
     }
 
     public void InputUpperAndLower()
     {
         _criSoundManager.PlaySE("SE_Attack_Simultaneous");
-        _animator.Play(Attack2);
+        if (_animator) _animator.Play(Attack2);
     }
 
     public void InputLower()
     {
         _criSoundManager.PlaySE("SE_Attack_Lower");
-        _animator.Play(Attack2);
+        if (_animator) _animator.Play(Attack2);
     }
 
     // Attack3はロングノーツ用
     // todo: アニメーションがループである必要がある
     public void InputLongPressStart()
     {
-        _animator.SetBool(Attack3, true);
+        if (_animator) _animator.SetBool(Attack3, true);
     }
 
     // todo: 「InputLongPressStart」で真にしたものを偽にする
     public void InputLongPressEnd()
     {
-        _animator.SetBool(Attack3, false);
+        if (_animator) _animator.SetBool(Attack3, false);
     }
 
     public void PlayHit()
     {
-        _animator.Play(Hit);
+        if (_animator) _animator.Play(Hit);
     }
 
     public void PlayDeath()
     {
-        _animator.Play(Death);
+        if (_animator) _animator.Play(Death);
     }
 }

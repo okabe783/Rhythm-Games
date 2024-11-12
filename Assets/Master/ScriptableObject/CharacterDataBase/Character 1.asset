@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: b9d3fc0167dfbd14184b5018aeabbd1b, type: 3}
   _faceIcon: {fileID: 21300000, guid: b9d3fc0167dfbd14184b5018aeabbd1b, type: 3}
+  _character: {fileID: 5778037883211777271, guid: 0a0ac1f7022cd2d4490e96a1f5e9ec82, type: 3}
   _characterId: 1
-  _hp: 0
+  _hp: 15
   _skillName: "\u30B9\u30AD\u30EB\uFF12"
   _skillInfo: "\u8AAC\u660E\uFF5E\uFF5E"

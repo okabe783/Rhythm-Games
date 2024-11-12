@@ -53,7 +53,7 @@ public class OnClickCellButton : MonoBehaviour
 
     private void ConfirmSelection()
     {
-        //IDを保存して新しいシーンに移動する
+        //　IDを保存して新しいシーンに移動する
         _selectData.SetItemData(_selectedMusicID);
         SceneLoad.I.StartShortLoad("SelectCharacter", "SelectMusicScene");
     }
