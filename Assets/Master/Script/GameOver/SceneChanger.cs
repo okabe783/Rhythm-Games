@@ -15,5 +15,6 @@ public class SceneChanger : MonoBehaviour
     private void OnClick()
     {
         SceneLoad.I.OnChangeScene(_sceneName, _unloadSceneName);
+        CriSoundManager.Instance.StopBGM();
     }
 }
