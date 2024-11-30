@@ -1,30 +1,21 @@
 using UnityEngine;
-using UnityEngine.UI;
 
+// 舵のアニメーションを制御
 public class RudderAnimation : MonoBehaviour
 {
     // 回転中かどうかを示すフラグ
     private bool _isRotating = false;
 
     // 目標回転角度
-    private float _targetRotation = 0f;
+    private float _targetRotation;
 
     // 回転速度（1秒あたりに回転する角度）
-    private float _rotationSpeed = 180f;
+    [SerializeField,Header("1秒あたりの回転するスピード")]private float _rotationSpeed = 180f;
 
     // 右回転か左回転かを示すフラグ
     private bool _rotateRight = true;
 
-    [SerializeField] private Button _isLeftRotating;
-    [SerializeField] private Button _isRightRotating;
-
-    private void Start()
-    {
-        _isLeftRotating.onClick.AddListener(OnRotateLeft);
-        _isRightRotating.onClick.AddListener(OnRotateRight);
-    }
-
-    void Update()
+    private void Update()
     {
         if (_isRotating)
         {
@@ -32,7 +23,7 @@ public class RudderAnimation : MonoBehaviour
         }
     }
 
-    private void OnRotateRight()
+    public void OnRotateRight()
     {
         //　回転中であるとき
         if (_isRotating)
@@ -42,26 +33,25 @@ public class RudderAnimation : MonoBehaviour
             {
                 //　右向きにRotateを加える
                 _targetRotation += 180f;
-                _rotateRight = true;
             }
             else
             {
                 _targetRotation += 90f;
                 _isRotating = true;
-                _rotateRight = true;
             }
         }
         else
         {
             // 初期回転
-            _targetRotation = transform.eulerAngles.z + 90f; // 現在の角度から90度
+            _targetRotation = transform.eulerAngles.z + 90f;
             _isRotating = true;
-            _rotateRight = true;
         }
+
+        _rotateRight = true;
     }
 
     // 左回転ボタンが押されたときの処理
-    private void OnRotateLeft()
+    public void OnRotateLeft()
     {
         // 回転中であるとき
         if (_isRotating)
@@ -69,7 +59,6 @@ public class RudderAnimation : MonoBehaviour
             // 右向きに回転しているのであれば
             if (_rotateRight)
             {
-                Debug.Log("左に回転");
                 // 逆方向に回転させる
                 _targetRotation -= 180f;
                 // 左回転フラグに変更
@@ -84,9 +73,8 @@ public class RudderAnimation : MonoBehaviour
         }
         else
         {
-            Debug.Log("左に初期回転");
             // 初期回転
-            _targetRotation = transform.eulerAngles.z - 90f; // 現在の角度から-90度
+            _targetRotation = transform.eulerAngles.z - 90f;
             _rotateRight = false;
             _isRotating = true;
         }
@@ -107,8 +95,10 @@ public class RudderAnimation : MonoBehaviour
         }
         else
         {
-            float rotationDirection = Mathf.Sign(_targetRotation - currentRotation); // 回転方向を決定
-            transform.Rotate(Vector3.forward, rotationDirection * step); // Z軸回りに回転
+            // 回転方向を決定
+            float rotationDirection = Mathf.Sign(_targetRotation - currentRotation);
+            // Z軸回りに回転
+            transform.Rotate(Vector3.forward, rotationDirection * step); 
         }
     }
 }
