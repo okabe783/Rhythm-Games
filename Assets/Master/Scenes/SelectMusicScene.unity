@@ -258,6 +258,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _backState: 1
+  _sceneName: SelectMusicScene
+  _backButton: {fileID: 113986426}
 --- !u!1 &600555653
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,9 +293,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scrollView: {fileID: 2051528484}
+  _soundTableList: {fileID: 11400000, guid: 00b11cb1f9b83114d9b250bfc8490eda, type: 2}
+  _rudderAnimation: {fileID: 832496355}
   _prevCellButton: {fileID: 1673723933}
   _nextCellButton: {fileID: 1354228821}
-  _soundTableList: {fileID: 11400000, guid: 00b11cb1f9b83114d9b250bfc8490eda, type: 2}
 --- !u!114 &600555655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -477,8 +480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19d5aa271b2b2974ca5f189d2751031b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isLeftRotating: {fileID: 1673723933}
-  _isRightRotating: {fileID: 1354228821}
+  _rotationSpeed: 360
 --- !u!1 &1082855089
 GameObject:
   m_ObjectHideFlags: 0
@@ -973,7 +975,6 @@ MonoBehaviour:
   cellContainer: {fileID: 1082855090}
   _scroller: {fileID: 2051528485}
   _cellPrefab: {fileID: 2571148113066236433, guid: 7a57dab67d3bff140929fc52945de66f, type: 3}
-  _rudderAnimator: {fileID: 0}
 --- !u!114 &2051528485
 MonoBehaviour:
   m_ObjectHideFlags: 0

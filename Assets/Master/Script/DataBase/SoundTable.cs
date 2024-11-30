@@ -1,7 +1,7 @@
 using UnityEngine;
 
+/// <summary>使用するサウンドとシーンを保存</summary>
 [CreateAssetMenu(fileName = "SoundTable", menuName = "Sound/SoundTable")]
-//使用するサウンドとシーンを保存
 public class SoundTable : ScriptableObject
 {
     public int TableId;
