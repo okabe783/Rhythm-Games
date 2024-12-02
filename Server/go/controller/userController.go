@@ -3,7 +3,6 @@ package controller
 import (
 	"Server/model"
 	"github.com/gin-gonic/gin"
-	"gorm.io/gorm"
 	"log"
 )
 
@@ -15,25 +14,24 @@ func (u *UserController) Ping(c *gin.Context) {
 	})
 }
 
-func (u *UserController) GetAllUser(c *gin.Context, db *gorm.DB) {
+func (u *UserController) GetAllUser(c *gin.Context) {
 	var users []model.User
-	db.Find(&users)
+	DB.Find(&users)
 	c.JSON(200, users)
 }
 
-func (u *UserController) GetUser(c *gin.Context, db *gorm.DB) {
+func (u *UserController) GetUser(c *gin.Context) {
 	id := c.Param("id")
-	db.Select("name").Find(model.User{}, id)
+	DB.Select("name").Find(model.User{}, id)
 	c.JSON(200, model.User{})
 }
 
-func (u *UserController) CreateUser(c *gin.Context, db *gorm.DB) {
+func (u *UserController) CreateUser(c *gin.Context) {
 	var user model.User
 	err := c.BindJSON(&user)
 	if err != nil {
 		log.Fatal(err)
 	}
-	db.Create(&user)
+	DB.Create(&user)
 	c.JSON(200, user)
-
 }

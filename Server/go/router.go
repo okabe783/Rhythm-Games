@@ -3,20 +3,26 @@ package main
 import (
 	"Server/controller"
 	"github.com/gin-gonic/gin"
-	"gorm.io/gorm"
 )
 
-func Routes(e *gin.Engine, db *gorm.DB) {
+func Routes(e *gin.Engine) {
 	userController := controller.UserController{}
+	rankingController := controller.RankingController{}
 
 	// 接続に対してメッセージを送る
 	e.GET("/ping", userController.Ping)
 
-	// DBの全データをJSONで返す
-	e.GET("/getAll")
+	userSettings := e.Group("/user")
+	{
+		// DBの全データをJSONで返す
+		userSettings.GET("/getAll", userController.GetAllUser)
+		userSettings.GET("/get/:id", userController.GetUser)
+		userSettings.GET("/create", userController.CreateUser)
+	}
 
-	e.GET("/get/:id")
-
-	// DBへデータ追加
-	e.POST("/post")
+	rankingSettings := e.Group("/ranking")
+	{
+		// DBへデータ追加
+		rankingSettings.POST("/post", rankingController.PostRankingData)
+	}
 }
