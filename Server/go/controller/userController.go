@@ -16,13 +16,13 @@ func (u *UserController) Ping(c *gin.Context) {
 
 func (u *UserController) GetAllUser(c *gin.Context) {
 	var users []model.User
-	DB.Find(&users)
+	model.DB.Find(&users)
 	c.JSON(200, users)
 }
 
 func (u *UserController) GetUser(c *gin.Context) {
 	id := c.Param("id")
-	DB.Select("name").Find(model.User{}, id)
+	model.DB.Select("name").Find(model.User{}, id)
 	c.JSON(200, model.User{})
 }
 
@@ -32,6 +32,6 @@ func (u *UserController) CreateUser(c *gin.Context) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	DB.Create(&user)
+	model.DB.Create(&user)
 	c.JSON(200, user)
 }

@@ -1,14 +1,12 @@
 package main
 
 import (
-	"Server/controller"
+	"Server/model"
 	"github.com/gin-gonic/gin"
 )
 
-var MasterController = controller.MasterController{}
-
 func main() {
-	MasterController.DBInit()
+	model.DBInit()
 
 	e := *gin.Default()
 	Routes(&e)

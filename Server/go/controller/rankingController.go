@@ -14,6 +14,6 @@ func (r *RankingController) PostRankingData(c *gin.Context) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	DB.Create(&user)
+	model.DB.Create(&user)
 	c.JSON(200, user)
 }
