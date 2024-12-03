@@ -6,14 +6,14 @@ import (
 )
 
 func Routes(e *gin.Engine) {
-	userController := controller.UserController{}
-	rankingController := controller.RankingController{}
-
-	// 接続に対してメッセージを送る
-	e.GET("/ping", userController.Ping)
+	auth := e.Group("/auth")
+	{
+		auth.GET("/register")
+	}
 
 	userSettings := e.Group("/user")
 	{
+		userController := controller.UserController{}
 		// DBの全データをJSONで返す
 		userSettings.GET("/getAll", userController.GetAllUser)
 		userSettings.GET("/get/:id", userController.GetUser)
@@ -22,6 +22,7 @@ func Routes(e *gin.Engine) {
 
 	rankingSettings := e.Group("/ranking")
 	{
+		rankingController := controller.RankingController{}
 		// DBへデータ追加
 		rankingSettings.POST("/post", rankingController.PostRankingData)
 	}
