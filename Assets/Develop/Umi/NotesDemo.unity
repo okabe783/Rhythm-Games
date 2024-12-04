@@ -683,6 +683,8 @@ MonoBehaviour:
   _selectData: {fileID: 11400000, guid: cd2535bb64d07ee4c8cfeb6f32ff7044, type: 2}
   _characterDataBaseList: {fileID: 11400000, guid: cec8f87ba6dfcc842b8979da011db8d0, type: 2}
   _seName: 
+  _parent: {fileID: 0}
+  _pos: {x: 0, y: 0, z: 0}
 --- !u!114 &287755515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1258,6 +1260,53 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &918554782
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 918554784}
+  - component: {fileID: 918554783}
+  m_Layer: 0
+  m_Name: RateGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &918554783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 918554782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2fbdcc64dd420e4c847fe7aa05fbe94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _perfect: {fileID: 107224792199781996, guid: b8db1942c33939b47b2b064818f12996, type: 3}
+  _great: {fileID: 4554174594734685979, guid: 73e3e09a3781ade4cab0269bddd0e24f, type: 3}
+  _miss: {fileID: 3680802279509260326, guid: 1f708d5f102ac5c4ebeaad1312db79d6, type: 3}
+--- !u!4 &918554784
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 918554782}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &995578054
 GameObject:
   m_ObjectHideFlags: 0
@@ -1284,7 +1333,7 @@ Transform:
   m_GameObject: {fileID: 995578054}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.86814624, y: 1.2163976, z: -0.017981095}
+  m_LocalPosition: {x: -0.8681462, y: 1.216398, z: -0.0179811}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1305,10 +1354,10 @@ MonoBehaviour:
   _player: {fileID: 287755511}
   _damageValue: 1
   _notesManager: {fileID: 1739380833}
-  _score: {fileID: 2144932587}
+  _scorePresenter: {fileID: 0}
   _perfectTime: 0.03
   _greatTime: 0.05
-  _index: 0
+  _rateGenerate: {fileID: 918554783}
 --- !u!1 &1132647464
 GameObject:
   m_ObjectHideFlags: 0
@@ -1622,6 +1671,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvas: {fileID: 1181822446}
+  _musicManager: {fileID: 0}
 --- !u!4 &1198802013
 Transform:
   m_ObjectHideFlags: 0
@@ -2076,8 +2126,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _noteSpeed: 10
-  _noteStartLine: -2.5
   _songName: "\u8001\u8CE2\u4EBA\u306E\u821F"
+  _delay: 0
+  _noteStartLine: -2.5
 --- !u!4 &1739380834
 Transform:
   m_ObjectHideFlags: 0
@@ -2108,6 +2159,7 @@ MonoBehaviour:
   _notesObj:
   - {fileID: 3598992444544070995, guid: 1108b000e9f852b4d9e500bd63b0d140, type: 3}
   - {fileID: 838931787211784162, guid: 17ccc3cb74622f049a9106f43e1a3add, type: 3}
+  _sceneName: 
 --- !u!1 &1786199587
 GameObject:
   m_ObjectHideFlags: 0
@@ -2637,7 +2689,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 251ed534b2375b54cb35ccdf5f1f0429, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scoreManager: {fileID: 2144932586}
   _perfectPoint: 10
   _greatPoint: 5
 --- !u!4 &2144932588
@@ -2731,3 +2782,4 @@ SceneRoots:
   - {fileID: 287755520}
   - {fileID: 1187684066}
   - {fileID: 1459161648}
+  - {fileID: 918554784}

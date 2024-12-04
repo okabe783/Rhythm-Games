@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 /// <summary> ノーツの判定を行うクラス </summary>
 public class NotesJudge : MonoBehaviour
@@ -18,6 +17,8 @@ public class NotesJudge : MonoBehaviour
     /// <summary> これ以上だとMiss </summary>
     [SerializeField, Header("Greatの範囲")] private float _greatTime = 0.05f;
 
+    [SerializeField] private RateGenerate[] _rateGenerates;
+
     /// <summary> 曲が始まった時間 </summary>
     private float _startTime;
 
@@ -28,7 +29,7 @@ public class NotesJudge : MonoBehaviour
     private int _lane;
 
     private int _index = 0;
-
+    
     private void Start()
     {
         _damage = _player.GetComponent<IDamage>();
@@ -82,6 +83,7 @@ public class NotesJudge : MonoBehaviour
             _notesManager.DeleteNoteData(_lane, true);
             _damage.Damage(_damageValue);
             _scorePresenter.AddScore(Rating.Miss);
+            _rateGenerates[_lane].Rate(Rating.Miss);
         }
         else
         {
@@ -100,8 +102,8 @@ public class NotesJudge : MonoBehaviour
         {
             // Perfectの処理
             _notesManager.DeleteNoteData(lane, false);
-            Debug.Log("perfect");
             _scorePresenter.AddScore(Rating.Perfect);
+            _rateGenerates[lane].Rate(Rating.Perfect);
             //Soundを再生
             CriSoundManager.Instance.PlaySE("SE_Perfect", 5f);
         }
@@ -109,8 +111,8 @@ public class NotesJudge : MonoBehaviour
         {
             // Greatの処理
             _notesManager.DeleteNoteData(lane, false);
-            Debug.Log("Great");
             _scorePresenter.AddScore(Rating.Great);
+            _rateGenerates[lane].Rate(Rating.Great);
             //Soundを再生
             CriSoundManager.Instance.PlaySE("SE_Great", 5f);
         }
@@ -130,6 +132,7 @@ public class NotesJudge : MonoBehaviour
                 if(isLongNote) _longNoteFinishTime = -2;
                 _damage.Damage(_damageValue);
                 _scorePresenter.AddScore(Rating.Miss);
+                _rateGenerates[lane].Rate(Rating.Miss);
             }
         }
     }
