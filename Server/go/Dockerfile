@@ -4,4 +4,4 @@ RUN apt install tree
 
 RUN mkdir server
 WORKDIR /server
-COPY go/ /server
+COPY . /server
