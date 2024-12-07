@@ -18,8 +18,7 @@ func DBInit() {
 		log.Fatal("Failed to connect database: ", err)
 	}
 
-	err = DB.AutoMigrate(User{}, Ranking{})
-	if err != nil {
+	if err = DB.AutoMigrate(User{}, Ranking{}); err != nil {
 		log.Fatal("Migrate Error: ", err)
 	}
 }
