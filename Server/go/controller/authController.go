@@ -2,6 +2,7 @@ package controller
 
 import (
 	"Server/model"
+	"Server/utils"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -61,6 +62,26 @@ func (a *AuthController) Login(c *gin.Context) {
 	} else {
 		c.JSON(http.StatusOK, gin.H{
 			"token": token,
+		})
+	}
+}
+
+func (a *AuthController) CurrentUser(c *gin.Context) {
+	userId, err := utils.ExtractTokenId(c)
+
+	if err != nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
+		return
+	}
+
+	var user model.User
+
+	if err = model.DB.First(&user, userId).Error; err != nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
+		return
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"data": user.PrepareOutput(),
 		})
 	}
 }
