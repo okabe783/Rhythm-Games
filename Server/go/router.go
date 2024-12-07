@@ -2,13 +2,22 @@ package main
 
 import (
 	"Server/controller"
+	"Server/middlewares"
 	"github.com/gin-gonic/gin"
 )
 
 func Routes(e *gin.Engine) {
 	auth := e.Group("/auth")
 	{
-		auth.GET("/register")
+		authController := controller.AuthController{}
+		auth.POST("/register", authController.Register)
+		auth.POST("/login", authController.Login)
+
+		protected := e.Group("/admin")
+		{
+			protected.Use(middlewares.JwtAuthMiddleware())
+			protected.GET("/user", authController.CurrentUser)
+		}
 	}
 
 	userSettings := e.Group("/user")
