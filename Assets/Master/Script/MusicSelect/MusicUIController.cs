@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SelectMusicView : SingletonMonoBehaviour<SelectMusicView>
+public class MusicUIController : SingletonMonoBehaviour<MusicUIController>
 {
     [SerializeField] private Button _prevCellButton;
     [SerializeField] private Button _nextCellButton;

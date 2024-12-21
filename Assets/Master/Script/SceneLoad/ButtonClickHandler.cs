@@ -9,10 +9,13 @@ public class ButtonClickHandler : MonoBehaviour
         gameObject.GetComponent<Button>().onClick.AddListener(OnClickSceneChange);
     }
 
-    public void OnClickSceneChange()
+    private void OnClickSceneChange()
     {
         if (SceneLoad.I != null)
+        {
             SceneLoad.I.OnChangeScene("SelectMusicScene","TitleScene");
+        }
+            
         else
             Debug.LogError("SceneLoadインスタンスを取得できていません");
     }

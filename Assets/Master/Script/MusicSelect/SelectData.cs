@@ -4,12 +4,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SelectedCharacterData", menuName = "Game/Selected Data", order = 1)]
 public class SelectData : ScriptableObject
 {
-    public SoundTable ItemData { get; private set; } //SoundDataを保存
+    // SoundDataを保存
+    public SoundTable ItemData { get; set; } 
     
-    public int _characterId { get; set; } //CharacterのIdを保存
-
-    public void SetItemData(SoundTable soundTable)
-    {
-        ItemData = soundTable;
-    }
+    // CharacterのIDを保存
+    public int CharacterId { get; set; } 
 }
