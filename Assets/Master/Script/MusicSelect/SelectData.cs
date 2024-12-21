@@ -5,8 +5,8 @@ using UnityEngine;
 public class SelectData : ScriptableObject
 {
     // SoundDataを保存
-    public SoundTable ItemData { get; set; } 
+    public SoundTable ItemData;
     
     // CharacterのIDを保存
-    public int CharacterId { get; set; } 
+    public int CharacterId;
 }
