@@ -18,7 +18,6 @@ internal class ScrollView : FancyScrollView<SellItemData, Context>
     {
         // コールバックの設定
         _scroller.OnValueChanged(UpdatePosition);
-        // インデックスが変更されたときのコールバック
         _scroller.OnSelectionChanged(UpdateSelection);
     }
     

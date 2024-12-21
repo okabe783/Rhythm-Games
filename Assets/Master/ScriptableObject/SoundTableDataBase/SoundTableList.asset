@@ -15,4 +15,4 @@ MonoBehaviour:
   _soundTables:
   - {fileID: 11400000, guid: 380d2440e6ef7e942a75d588132b0266, type: 2}
   - {fileID: 11400000, guid: 31261229106dd524f81c97b87881afba, type: 2}
-  - {fileID: 11400000, guid: 26bf059892204b04583a3bcb5242a1d2, type: 2}
+  - {fileID: 11400000, guid: 94d2a1a445154404990d95c46cc1f4e2, type: 2}

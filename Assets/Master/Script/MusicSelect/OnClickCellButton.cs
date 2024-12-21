@@ -7,28 +7,27 @@ public class OnClickCellButton : MonoBehaviour
 {
     [SerializeField] private Cell _cell;
     [SerializeField] private MoveCellToPoints _moveCellToPoints;
-
     [SerializeField, Header("曲を選択した時に表示する戻るボタン")] private Button _backButtonPrefab;
     [SerializeField, Header("曲選択時に出てくる決定ボタン")] private Button _confirmButtonPrefab;
     [SerializeField, Header("セルのボタン")] private Button _musicCellButtonPrefab;
-    [SerializeField, Header("保存場所")] private SelectData _selectData;
+    [SerializeField, Header("Dataの保存場所")] private SelectData _selectData;
 
     private Vector3 _savedPosition;
     private Button _backButtonInstance;
     private Button _confirmButtonInstance;
     private SoundTable _selectedMusicID;
-
     private OnClickCellButton[] _cellButtons;
-
-    private Context _context;
     
     private void Start()
     {
-        // ボタンにイベントを登録
-        _musicCellButtonPrefab.onClick.AddListener(PlayCellSelectionAnimation);
-        // インスタンス化される全ての曲リストを配列に格納する
+        InitializeEvents();
         _cellButtons = FindObjectsOfType<OnClickCellButton>();
-        
+        UpdateButtonInteractivity(_cell.GetContextIndex());
+    }
+
+    private void InitializeEvents()
+    {
+        _musicCellButtonPrefab.onClick.AddListener(PlayCellSelectionAnimation);
         _cell.UpdateContext(UpdateButtonInteractivity);
     }
     
@@ -37,7 +36,7 @@ public class OnClickCellButton : MonoBehaviour
     {
         foreach (OnClickCellButton cellButton in _cellButtons)
         {
-            //　セルの
+            //　セルのインデックスが現在のContextの_selectedIndexと一致していればクリック可能にする
             cellButton._musicCellButtonPrefab.interactable = cellButton._cell.Index == index;
         }
     }
@@ -54,7 +53,7 @@ public class OnClickCellButton : MonoBehaviour
             return;
         }
 
-        SelectMusicView.I.DeactivateUI();
+        MusicUIController.I.DeactivateUI();
 
         foreach (OnClickCellButton cellButton in _cellButtons)
         {
@@ -62,7 +61,7 @@ public class OnClickCellButton : MonoBehaviour
             if (cellButton._cell.Index == context)
             {
                 _savedPosition = _musicCellButtonPrefab.transform.position;
-                _musicCellButtonPrefab.transform.DOScale(new Vector2(2, 2), 0.5f);
+                _musicCellButtonPrefab.transform.DOScale(new Vector2(1.5f, 1.5f), 0.5f);
                 _musicCellButtonPrefab.transform.DOMove(new Vector2(-5, 0), 0.5f);
 
                 // UIを表示する
@@ -76,7 +75,7 @@ public class OnClickCellButton : MonoBehaviour
             {
                 // 他のセルのボタンを無効化
                 cellButton._musicCellButtonPrefab.interactable = false;
-
+                
                 cellButton._savedPosition = cellButton._musicCellButtonPrefab.transform.position;
                 Vector2[] points = _moveCellToPoints.GetCircularPoints();
                 Vector2 currentPosition = cellButton.transform.position;
@@ -89,13 +88,14 @@ public class OnClickCellButton : MonoBehaviour
     private void ConfirmSelection()
     {
         //　IDを保存して新しいシーンに移動する
-        _selectData.SetItemData(_selectedMusicID);
+        _selectData.ItemData = _selectedMusicID;
+        TitleSound.I.StopSound();
         SceneLoad.I.StartShortLoad("SelectCharacter", "SelectMusicScene");
     }
 
     private void ReturnToSavePosition()
     {
-        SelectMusicView.I.ActiveUI();
+        MusicUIController.I.ActiveUI();
 
         foreach (OnClickCellButton cellButton in _cellButtons)
         {

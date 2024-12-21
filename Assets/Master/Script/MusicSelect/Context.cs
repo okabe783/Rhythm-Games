@@ -2,8 +2,8 @@ using System;
 
 public class Context
 {
-    public event Action<int> OnSelectionChanged;
     private int _selectedIndex = -1;
+    public event Action<int> OnSelectionChanged;
     
     public int SelectedIndex
     {

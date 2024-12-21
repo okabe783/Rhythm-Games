@@ -1,16 +1,18 @@
 using System;
 using FancyScrollView;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>曲データ</summary>
 internal class Cell : FancyCell<SellItemData, Context>
 {
     [SerializeField] private Animator _animator;
+    [SerializeField,Header("ジャケット")] private Image _icon;
 
     private SoundTable _musicID;
     private float _currentPosition;
 
-    private static readonly int Scroll = Animator.StringToHash("ScrollButton");
+    private static readonly int _scroll = Animator.StringToHash("ScrollButton");
 
     public SoundTable MusicID => _musicID;
 
@@ -27,6 +29,11 @@ internal class Cell : FancyCell<SellItemData, Context>
 
     private void OnEnable() => UpdatePosition(_currentPosition);
 
+    private void Start()
+    {
+        _icon.sprite = _musicID.Icon;
+    }
+
     /// <summary>サウンドIDを更新する</summary>
     /// <param name="itemData"></param>
     public override void UpdateContent(SellItemData itemData)
@@ -42,7 +49,7 @@ internal class Cell : FancyCell<SellItemData, Context>
 
         if (_animator.isActiveAndEnabled)
         {
-            _animator.Play(Scroll, -1, position);
+            _animator.Play(_scroll, -1, position);
         }
 
         _animator.speed = 0;

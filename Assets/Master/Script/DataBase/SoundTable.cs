@@ -4,8 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SoundTable", menuName = "Sound/SoundTable")]
 public class SoundTable : ScriptableObject
 {
-    public int TableId;
-    public int PreviewTime;
+    public Sprite Icon;
     public string SoundName;
     public string SelectScene;
 }

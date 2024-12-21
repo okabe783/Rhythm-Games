@@ -23,7 +23,7 @@ public class SceneLoad : SingletonMonoBehaviour<SceneLoad>
         SceneManager.UnloadSceneAsync(unloadScene);
     } 
     
-    // Loading中にUIを表示するメソッド
+    /// <summary>Loading中にUIを表示するメソッド</summary>
     public void StartLongLoad(string sceneName, string unloadScene)
     {
         StartCoroutine(InGameLoad(sceneName, unloadScene));
