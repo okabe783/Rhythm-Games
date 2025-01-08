@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Character
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 10bdd8a779fae914889d3220a269e6c2, type: 3}
-  _faceIcon: {fileID: 21300000, guid: 7b5c6d89deb692143be4cb213d767b97, type: 3}
+  _faceIcon: {fileID: 21300000, guid: 29e9679b92a6a6e48bbadb64dff02601, type: 3}
   _character: {fileID: 3061464320383003193, guid: cff45d092e4b40e4494ffa44069eef79, type: 3}
   _characterId: 0
   _hp: 15
