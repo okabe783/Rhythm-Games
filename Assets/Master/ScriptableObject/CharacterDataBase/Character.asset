@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46bc3d4776d3ae642bd348ccb39091be, type: 3}
   m_Name: Character
   m_EditorClassIdentifier: 
-  _icon: {fileID: 21300000, guid: 1e6dd0b5b48fb0d4cba66d816634eeeb, type: 3}
-  _faceIcon: {fileID: 21300000, guid: 1e6dd0b5b48fb0d4cba66d816634eeeb, type: 3}
+  _icon: {fileID: 21300000, guid: 10bdd8a779fae914889d3220a269e6c2, type: 3}
+  _faceIcon: {fileID: 21300000, guid: 29e9679b92a6a6e48bbadb64dff02601, type: 3}
   _character: {fileID: 3061464320383003193, guid: cff45d092e4b40e4494ffa44069eef79, type: 3}
   _characterId: 0
   _hp: 15
-  _skillName: "\u30B9\u30AD\u30EB\u540D\u300C\u307B\u3052\uFF10\u300D"
-  _skillInfo: "\u30B9\u30AD\u30EB\u306E\u8AAC\u660E\n\u300C\u307B\u3052\u307B\u3052\uFF10\u300D"
+  _skillName: "\u8239\u9577"
+  _skillInfo: "\u30AE\u30BF\u30EA\u30B9\u30C8"

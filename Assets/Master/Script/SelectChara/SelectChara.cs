@@ -28,7 +28,7 @@ public class SelectChara : MonoBehaviour
     {
         // 押されたときにSE再生
         CriSoundManager.Instance.PlaySE(_seName);
-        _selectData._characterId = id; // 保存クラスに保存
+        _selectData.CharacterId = id; // 保存クラスに保存
         Debug.Log($"キャラID : {id} を保存します。");
         SleepButton(id);
         StartCoroutine(WaitForSe());
