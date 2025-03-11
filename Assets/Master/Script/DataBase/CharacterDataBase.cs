@@ -10,7 +10,9 @@ public class CharacterDataBase : ScriptableObject
     [SerializeField] private int _characterId;
     [SerializeField] private int _hp;
     [SerializeField, Header("スキル名")] private string _skillName;
-    [SerializeField, Header("スキルの説明")][TextArea(1, 4)] private string _skillInfo;
+
+    [SerializeField, Header("スキルの説明")] [TextArea(1, 4)]
+    private string _skillInfo;
 
     public Sprite Icon => _icon;
     public Sprite FaceIcon => _faceIcon;
@@ -19,4 +21,25 @@ public class CharacterDataBase : ScriptableObject
     public int Hp => _hp;
     public string SkillName => _skillName;
     public string SkillInfo => _skillInfo;
+    [SerializeField] private ScriptableObject abilityAsset;
+
+    private IAbility ability;
+
+    private void OnEnable()
+    {
+        // 実行時にインターフェースとしてキャスト
+        if (abilityAsset is IAbility iAbility)
+        {
+            ability = iAbility;
+        }
+        else
+        {
+            Debug.LogError("IAbility is not implemented");
+        }
+    }
+
+    public void UseAbility()
+    {
+        ability?.Ability();
+    }
 }

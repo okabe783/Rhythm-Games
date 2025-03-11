@@ -23,10 +23,14 @@ public class UpdatePlayer : MonoBehaviour, IDamage
 
     #endregion
 
+    /// <summary> HPの上限を増やす </summary>
+    public int AddMaxHp { get; set; }
+
+
     private void Start()
     {
         //Dataを読み込む
-        var characterId = _selectData._characterId;
+        var characterId = _selectData.CharacterId;
 
         CharacterDataBase selectedCharacterData = null;
 
@@ -41,9 +45,14 @@ public class UpdatePlayer : MonoBehaviour, IDamage
 
         if (selectedCharacterData != null)
         {
+            // スキル呼び出し
+            selectedCharacterData.UseAbility();
+
             //Dataの取得
             _sprite = selectedCharacterData.Icon;
-            _maxHp = selectedCharacterData.Hp;
+            _maxHp = selectedCharacterData.Hp + AddMaxHp;
+            Debug.Log($"defaultMaxHp: {selectedCharacterData.Hp}  +  AddMaxHp: {AddMaxHp}  =  playerHp: {_maxHp}");
+            
             if (selectedCharacterData.Character)
             {
                 var go = Instantiate(selectedCharacterData.Character, _parent);
@@ -52,6 +61,7 @@ public class UpdatePlayer : MonoBehaviour, IDamage
 
             //SpriteやHpの更新処理を追加
             UpdateVisuals();
+
             OnInitialHpSet?.Invoke();
         }
     }
