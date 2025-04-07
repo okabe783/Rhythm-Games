@@ -29,7 +29,7 @@ public class NotesJudge : MonoBehaviour
     private int _lane;
 
     private int _index = 0;
-    
+
     private void Start()
     {
         _damage = _player.GetComponent<IDamage>();
@@ -129,11 +129,20 @@ public class NotesJudge : MonoBehaviour
             if (Time.time - (noteTime + _startTime) > _greatTime)
             {
                 _notesManager.DeleteNoteData(lane, true);
-                if(isLongNote) _longNoteFinishTime = -2;
+                if (isLongNote) _longNoteFinishTime = -2;
                 _damage.Damage(_damageValue);
                 _scorePresenter.AddScore(Rating.Miss);
                 _rateGenerates[lane].Rate(Rating.Miss);
             }
         }
+    }
+
+    /// <summary>
+    /// PerfectとGreatの判定を変更する
+    /// </summary>
+    public void ChangeTime(float perfect, float great)
+    {
+        _perfectTime = perfect;
+        _greatTime = great;
     }
 }
